@@ -23,6 +23,12 @@
 			"style": {
 				"navigationStyle": "default"
 			}
+		},
+		{
+			"path": "pages/ship/doing",
+			"style": {
+				"navigationStyle": "custom"
+			}
 		}
 	],
 	"subPackages": [{

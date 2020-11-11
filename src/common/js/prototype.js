@@ -1,15 +1,15 @@
 import Vue from 'vue'
 import { http } from '@/common/js/request'
-import {TAB_PAGES} from '@/common/js/const'
+// import {TAB_PAGES} from '@/common/js/const'
 
 Vue.prototype.$go = (url, type = 'navigate', opt = {}) => {
   url = `${url}`
   if (url.startsWith('http')) {
     url = `/pages/h5/index?src=${encodeURIComponent(url)}`
   }
-  if (TAB_PAGES.findIndex(i => i.startsWith(url))>-1) {
-    type = 'switch'
-  }
+  // if (TAB_PAGES.findIndex(i => i.startsWith(url))>-1) {
+  //   type = 'switch'
+  // }
   switch (type) {
     case 'navigate':
       uni.navigateTo({

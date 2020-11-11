@@ -1,0 +1,77 @@
+{
+	"pages": [
+		{
+			"path": "pages/home/index",
+			"style": {
+				"navigationStyle": "default"
+			}
+		},
+		{
+			"path": "pages/shop/index",
+			"style": {
+				"navigationStyle": "default"
+			}
+		},
+		{
+			"path": "pages/ship/index",
+			"style": {
+				"navigationStyle": "default"
+			}
+		},
+		{
+			"path": "pages/me/index",
+			"style": {
+				"navigationStyle": "default"
+			}
+		}
+	],
+	"subPackages": [{
+		"root": "pages-sub",
+		"pages": [
+			{
+				"path": "test/index",
+				"style": {
+					"navigationBarTitleText": "test",
+					"navigationStyle": "default"
+				}
+			}
+		]
+	}],
+	"tabBar": {
+		"color": "#929292",
+		"selectedColor": "#F92F74",
+		"borderStyle": "black",
+		"backgroundColor": "#ffffff",
+		"list": [{
+				"pagePath": "pages/home/index",
+				"iconPath": "static/tab/icon0.png",
+				"selectedIconPath": "static/tab/icon0-a.png",
+				"text": "首页"
+			},
+			{
+				"pagePath": "pages/shop/index",
+				"iconPath": "static/tab/icon1.png",
+				"selectedIconPath": "static/tab/icon1-a.png",
+				"text": "商城"
+			},
+			{
+				"pagePath": "pages/ship/index",
+				"iconPath": "static/tab/icon2.png",
+				"selectedIconPath": "static/tab/icon2-a.png",
+				"text": "配送"
+			},
+			{
+				"pagePath": "pages/me/index",
+				"iconPath": "static/tab/icon3.png",
+				"selectedIconPath": "static/tab/icon3-a.png",
+				"text": "我的"
+			}
+		]
+	},
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "大理山泉",
+		"navigationBarBackgroundColor": "#fff",
+		"backgroundColor": "#F8F8F8"
+	}
+}

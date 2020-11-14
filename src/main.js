@@ -8,6 +8,7 @@ import PageHeader from '@/components/pageHeader'
 import BottomBar from '@/components/bottomBar'
 import Modal from '@/components/modal'
 import Empty from '@/components/empty'
+import GoodsNumber from '@/components/goodsNumber'
 
 Vue.config.productionTip = false
 
@@ -17,6 +18,7 @@ Vue.component('PageHeader', PageHeader)
 Vue.component('BottomBar', BottomBar)
 Vue.component('Modal', Modal)
 Vue.component('Empty', Empty)
+Vue.component('GoodsNumber', GoodsNumber)
 
 const app = new Vue({
   store,

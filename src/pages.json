@@ -29,6 +29,18 @@
 			"style": {
 				"navigationStyle": "custom"
 			}
+		},
+		{
+			"path": "pages/goods/detail",
+			"style": {
+				"navigationStyle": "default"
+			}
+		},
+		{
+			"path": "pages/order/pay",
+			"style": {
+				"navigationStyle": "default"
+			}
 		}
 	],
 	"subPackages": [{

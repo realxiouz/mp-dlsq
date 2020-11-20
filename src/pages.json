@@ -41,6 +41,18 @@
 			"style": {
 				"navigationStyle": "default"
 			}
+		},
+		{
+			"path": "pages/address/list",
+			"style": {
+				"navigationStyle": "default"
+			}
+		},
+		{
+			"path": "pages/address/detail",
+			"style": {
+				"navigationStyle": "default"
+			}
 		}
 	],
 	"subPackages": [{

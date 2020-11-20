@@ -17,7 +17,7 @@ export const http = (url, data, method = 'post', showErrToast = true) => {
       'X-Requested-With': 'XMLHttpRequest'
     }
     let token = store.state.user.token
-    token && (header.authorization = token)
+    token && (header.token = token)
     uni
       .request({
         url: getUrl(url),
@@ -34,7 +34,7 @@ export const http = (url, data, method = 'post', showErrToast = true) => {
         let status = data.statusCode
         switch (status) {
           case 200:
-            if (data.data.code === 1000) {
+            if (data.data.code === 1) {
               resolve(data.data)
               return
             }

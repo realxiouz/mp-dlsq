@@ -1,7 +1,7 @@
 <template>
   <div class="cart-wrap ">
     <div class="flex pos-r" style="z-index:1111;">
-      <div class="left flex align-center bg-primary">
+      <div class="left flex align-center bg-primary" style="height:100rpx;">
         <div style="width:72rpx;height:58rpx;margin: 0 24rpx 0 36rpx">
           <img src="/static/img/cart.png" style="width:100%;height:100%;"  />
         </div>
@@ -57,7 +57,7 @@
 export default {
   data() {
     return {
-      count: 1,
+      count: 0,
       showDetail: false,
     }
   },

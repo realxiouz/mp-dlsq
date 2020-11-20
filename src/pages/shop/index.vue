@@ -4,8 +4,8 @@
       <div class="shop-header flex">
         <div class="left" v-for="(i, inx) in navs" :key="inx" @click="toggle(inx)">
           <div class="flex column align-center nav-item bg-white" :class="{sel:inx==curInx}">
-            <img :src="inx==curInx?i.icona:i.icon" />
-            <div>{{i.txt}}</div>
+            <img :src="i.image" />
+            <div>{{i.name}}</div>
             <div class="ind"></div>
           </div>
         </div>
@@ -13,7 +13,7 @@
     </div>
 
     <div class="flex wrap" style="padding: 33rpx 0 0 33rpx">
-      <goods v-for="(i, inx) in 8" :key="i" />
+      <goods v-for="(i, inx) in list" :key="inx" :bean="i"/>
     </div>
 
     <cart />
@@ -23,39 +23,35 @@
 <script>
 import Goods from '@/components/goods'
 import Cart from '@/components/cart'
+const mapGoods = i => ({
+  title: i.title,
+  subtitle: i.subtitle,
+  curSku: i.sku_price[0] || {},
+  image: i.image,
+  id: i.id,
+})
 
-const NAVS = [
-  {
-    txt: '全部',
-    icon: '/static/img/nav0.png',
-    icona: '/static/img/nav0a.png'
-  },
-  {
-    txt: '桶装',
-    icon: '/static/img/nav0.png',
-    icona: '/static/img/nav0a.png'
-  },
-  {
-    txt: '袋装',
-    icon: '/static/img/nav0.png',
-    icona: '/static/img/nav0a.png'
-  },
-  {
-    txt: '瓶装',
-    icon: '/static/img/nav0.png',
-    icona: '/static/img/nav0a.png'
-  },
-  {
-    txt: '套餐',
-    icon: '/static/img/nav0.png',
-    icona: '/static/img/nav0a.png'
-  },
-]
 export default {
+  onLoad(opt) {
+    this.$post('category', {id: 1})
+      .then(r => {
+        if (r.data.children.length) {
+          this.navs = r.data.children
+          this.getCatData()
+        } else {
+          this.$toast('获取分类异常')
+        }
+      })
+  },
   data() {
     return {
-      navs: NAVS,
+      navs: [],
       curInx: 0,
+      page: 1,
+      isLoading: false,
+      isEnd: false,
+      isLoaded: false,
+      list: [],
     }
   },
   components: {
@@ -67,7 +63,36 @@ export default {
       if (inx != this.curInx) {
         this.curInx = inx
       }
+      this.getCatData(true)
+    },
+    getCatData(reset = false) {
+      if (reset) {
+        this.list = []
+        this.page = 1
+        this.isEnd = false
+        this.isLoaded = false
+      }
+      let cId = this.navs[this.curInx].id
+      this.$post('goods/lists', {
+        category_id: cId,
+        page: this.page
+      }).then(r => {
+        this.list.push(...r.data.data.map(mapGoods))
+        // this.list.push(...r.data.data)
+        console.log(this.list)
+        if (r.data.data.length < 10) {
+          this.isEnd = true
+        }
+      })
+      
     }
+  },
+  onReachBottom() {
+    if (this.isLoading || this.isEnd) {
+      return
+    }
+    this.page++
+    this.getCatData()
   }
 }
 </script>

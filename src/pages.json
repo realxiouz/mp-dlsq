@@ -21,7 +21,7 @@
 		{
 			"path": "pages/me/index",
 			"style": {
-				"navigationStyle": "default"
+				"navigationStyle": "custom"
 			}
 		},
 		{
@@ -45,13 +45,28 @@
 		{
 			"path": "pages/address/list",
 			"style": {
-				"navigationStyle": "default"
+				"navigationStyle": "default",
+				"navigationBarTitleText": "地址管理"
 			}
 		},
 		{
 			"path": "pages/address/detail",
 			"style": {
 				"navigationStyle": "default"
+			}
+		},
+		{
+			"path": "pages/history/ship",
+			"style": {
+				"navigationStyle": "default",
+				"navigationBarTitleText": "配送记录"
+			}
+		},
+		{
+			"path": "pages/history/order",
+			"style": {
+				"navigationStyle": "default",
+				"navigationBarTitleText": "购水记录"
 			}
 		}
 	],

@@ -9,13 +9,13 @@
           <div style="font-size: 16px;color:#2F2E2E;margin-bottom:10rpx;">{{title}}</div>
           <div style="font-size: 10px;color:#929292;">{{subtitle}}</div>
         </div>
-        <div class="text-bold text-price color-primary" style="font-size: 14px;">6</div>
+        <div class="text-bold text-price color-primary" style="font-size: 14px;">{{curSku.price}}</div>
       </div>
       <div class="left"></div>
       <div class="flex">
         <div class="color-primary" style="font-size:12px;">购买数量</div>
         <div class="left"></div>
-        <goods-number w="192rpx" />
+        <goods-number w="192rpx" :bean="curSku" />
       </div>
       <div style="height:170rpx;"></div>
     </div>
@@ -36,7 +36,7 @@ export default {
       this.title = title
       this.subtitle = subtitle,
       this.image = image
-      this.price = sku_price[0].price
+      this.curSku= sku_price[0]
     })
       .finally(_ => {
         this.$hideLoading()
@@ -50,7 +50,9 @@ export default {
       title: '',
       subtitle: '',
       image: '',
-      price: ''
+      curSku: {
+        price: ''
+      }
     }
   },
 }

@@ -1,8 +1,8 @@
 <template>
   <div class="number-wrap flex" :style="{width: w}">
-    <div class="btn">-</div>
+    <div class="btn" @click.stop="onMinus">-</div>
     <div class="text-center left" style="font-size:12px;line-height:36rpx;">{{bean.count}}</div>
-    <div class="btn">+</div>
+    <div class="btn" @click.stop="onAdd">+</div>
   </div>
 </template>
 
@@ -18,6 +18,28 @@ export default {
     w: {
       type: String,
       default: '100%'
+    }
+  },
+  methods: {
+    onAdd() {
+      this.changeDelta(1)
+    },
+    onMinus() {
+      this.changeDelta(-1)
+    },
+    changeDelta(delta) {
+      let goods_list = [
+        {
+          goods_id: this.bean.goods_id,
+          goods_num: delta,
+          sku_price_id: this.bean.id,
+          goods_price: this.bean.price
+        }
+      ]
+      this.$post('cart/add', { goods_list })
+        .then(r => {
+          
+        })
     }
   }
 }

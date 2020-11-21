@@ -20,10 +20,9 @@ export default {
   actions:{
     updateInfo({commit}) {
       return new Promise((resolve, reject) => {
-        http('/user/index', null, 'get')
+        http('user', null, 'get')
           .then(r => {
             commit('setInfo', r.data)
-            commit('setInviteCode', r.data.inviteCode)
             resolve('ok')
           })
           .catch(e => {

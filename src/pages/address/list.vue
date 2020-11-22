@@ -23,6 +23,5 @@ export default {
   font-size: 12px;
   border-radius: 12rpx;
   line-height: 77rpx;
-  
 }
 </style>

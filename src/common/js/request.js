@@ -11,11 +11,7 @@ function getUrl(url) {
 
 export const http = (url, data, method = 'post', showErrToast = true) => {
   return new Promise((resolve, reject) => {
-    let header = {
-      version: 'v1',
-      channel: 'wechat',
-      'X-Requested-With': 'XMLHttpRequest'
-    }
+    let header = {}
     let token = store.state.user.token
     token && (header.token = token)
     uni

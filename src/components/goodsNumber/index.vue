@@ -1,19 +1,18 @@
 <template>
   <div class="number-wrap flex" :style="{width: w}">
     <div class="btn" @click.stop="onMinus">-</div>
-    <div class="text-center left" style="font-size:12px;line-height:36rpx;">{{bean.count}}</div>
+    <div class="text-center left" style="font-size:12px;line-height:36rpx;">{{curCount}}</div>
     <div class="btn" @click.stop="onAdd">+</div>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   props: {
     bean: {
       type: Object,
-      default: _ => ({
-        count: 1,
-      })
     },
     w: {
       type: String,
@@ -40,6 +39,14 @@ export default {
         .then(r => {
           
         })
+    }
+  },
+  computed: {
+    ...mapState('cart', ['cartGoods']),
+
+    curCount() {
+      let i = this.cartGoods.find(i => i.goods_id == this.bean.goods_id && i.sku_price_id == this.bean.sku_price_id)
+      return i ? i.goods_num : 0
     }
   }
 }

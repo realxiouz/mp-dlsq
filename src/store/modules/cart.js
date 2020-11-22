@@ -1,4 +1,17 @@
 import {http} from '@/common/js/request'
+
+const mapCartItem = i => ({
+  goods_id: i.goods_id,
+  sku_price_id: i.sku_price_id,
+  goods_num: i.goods_num,
+  goods: {
+    image: i.goods.image,
+    title: i.goods.title,
+    subtitle: i.goods.subtitle
+  },
+  price: i.sku_price.price
+})
+
 export default {
   namespaced: true,
   state: {
@@ -16,9 +29,23 @@ export default {
   getters: {
     totalCount(state) {
       return state.cartGoods.length
+    },
+    totalPrice(state) {
+      return state.cartGoods.reduce((pre,cur) => pre + cur.goods_num * cur.price, 0).toFixed(2)
     }
   },
   actions:{
-
+    updateCart({commit}) {
+      return new Promise((resolve, reject) => {
+        http('cart', null, 'post')
+          .then(r => {
+            commit('setCartGoods', r.data.map(mapCartItem))
+            resolve('ok')
+          })
+          .catch(e => {
+            reject(e)
+          })
+      })
+    }
   }
 }

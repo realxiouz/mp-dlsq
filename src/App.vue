@@ -21,6 +21,10 @@ export default {
         .then(r => {
           console.log('---登录成功---')
         })
+      this.$store.dispatch('cart/updateCart')
+        .then(r => {
+          console.log('---购物车初始成功---')
+        })
     }
 
     this.$store.dispatch('device/setDeviceInfo')

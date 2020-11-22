@@ -1,6 +1,6 @@
 <template>
   <div class="number-wrap flex" :style="{width: w}">
-    <div class="btn" @click.stop="onMinus">-</div>
+    <div class="btn" :class="{fb: curCount<=0}" @click.stop="onMinus">-</div>
     <div class="text-center left" style="font-size:12px;line-height:36rpx;">{{curCount}}</div>
     <div class="btn" @click.stop="onAdd">+</div>
   </div>
@@ -24,20 +24,30 @@ export default {
       this.changeDelta(1)
     },
     onMinus() {
+      if (this.curCount <= 0) {
+        return
+      }
       this.changeDelta(-1)
     },
     changeDelta(delta) {
+      if (this.isLoading) {
+        return
+      }
+      this.isLoading = true
       let goods_list = [
         {
           goods_id: this.bean.goods_id,
           goods_num: delta,
-          sku_price_id: this.bean.id,
+          sku_price_id: this.bean.sku_price_id,
           goods_price: this.bean.price
         }
       ]
       this.$post('cart/add', { goods_list })
         .then(r => {
-          
+          this.$store.dispatch('cart/updateCart')
+        })
+        .finally(_ => {
+          this.isLoading = false
         })
     }
   },
@@ -45,8 +55,8 @@ export default {
     ...mapState('cart', ['cartGoods']),
 
     curCount() {
-      let i = this.cartGoods.find(i => i.goods_id == this.bean.goods_id && i.sku_price_id == this.bean.sku_price_id)
-      return i ? i.goods_num : 0
+      let item = this.cartGoods.find(i => i.goods_id == this.bean.goods_id && i.sku_price_id == this.bean.sku_price_id)
+      return item ? item.goods_num : 0
     }
   }
 }

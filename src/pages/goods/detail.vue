@@ -1,13 +1,13 @@
 <template>
   <div class="flex column" style="height:100vh;">
     <div class="left" style="width:100%;">
-      <img :src="image" mode="widthFix" style="width:100%;"/>
+      <img :src="curSku.image" mode="widthFix" style="width:100%;"/>
     </div>
     <div class="info bg-white flex column">
       <div class="flex" style="margin-top:42rpx;">
         <div class="left">
-          <div style="font-size: 16px;color:#2F2E2E;margin-bottom:10rpx;">{{title}}</div>
-          <div style="font-size: 10px;color:#929292;">{{subtitle}}</div>
+          <div style="font-size: 16px;color:#2F2E2E;margin-bottom:10rpx;">{{curSku.title}}</div>
+          <div style="font-size: 10px;color:#929292;">{{curSku.subtitle}}</div>
         </div>
         <div class="text-bold text-price color-primary" style="font-size: 14px;">{{curSku.price}}</div>
       </div>
@@ -32,11 +32,15 @@ export default {
     this.$post('goods/detail', {
       id: opt.id
     }).then(r => {
-      let {title, subtitle, image, sku_price} = r.data
-      this.title = title
-      this.subtitle = subtitle,
-      this.image = image
-      this.curSku= sku_price[0]
+      let {title, subtitle, image, sku_price, id} = r.data
+      this.curSku= {
+        goods_id: id,
+        sku_price_id: sku_price[0].id,
+        price: sku_price[0].price,
+        image,
+        title,
+        subtitle,
+      }
     })
       .finally(_ => {
         this.$hideLoading()
@@ -47,9 +51,6 @@ export default {
   },
   data() {
     return {
-      title: '',
-      subtitle: '',
-      image: '',
       curSku: {
         price: ''
       }

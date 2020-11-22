@@ -4,12 +4,10 @@ const mapCartItem = i => ({
   goods_id: i.goods_id,
   sku_price_id: i.sku_price_id,
   goods_num: i.goods_num,
-  goods: {
-    image: i.goods.image,
-    title: i.goods.title,
-    subtitle: i.goods.subtitle
-  },
-  price: i.sku_price.price
+  price: i.sku_price.price,
+  image: i.goods.image,
+  title: i.goods.title,
+  subtitle: i.goods.subtitle
 })
 
 export default {

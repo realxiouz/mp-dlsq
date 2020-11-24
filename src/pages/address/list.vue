@@ -10,7 +10,12 @@
 
 <script>
 export default {
-
+  onShow() {
+    this.$post('address')
+      .then(r => {
+        console.log(r)
+      })
+  }
 }
 </script>
 

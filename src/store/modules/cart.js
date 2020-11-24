@@ -37,7 +37,7 @@ export default {
       return new Promise((resolve, reject) => {
         http('cart', null, 'post')
           .then(r => {
-            commit('setCartGoods', r.data.map(mapCartItem))
+            commit('setCartGoods', r.data.map(mapCartItem).filter(i => i.goods_num))
             resolve('ok')
           })
           .catch(e => {

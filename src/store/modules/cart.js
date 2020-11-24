@@ -23,6 +23,9 @@ export default {
     changeCartGoods(state, {i, delta=1}) {
       
     },
+    setCurAddress(state, address) {
+      state.curAddress = address
+    }
   },
   getters: {
     totalCount(state) {

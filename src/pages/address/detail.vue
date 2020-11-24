@@ -9,11 +9,11 @@
       <div class="title">
         联系人
       </div>
-      <input v-model="name" placeholder="请填写收货人的姓名" class="left" />
+      <input v-model="consignee" placeholder="请填写收货人的姓名" class="left" />
       <picker class="left" :range="sexTypes" :value="sexInx" @change="sexInx=$event.detail.value">
         <div class="flex">
           <div class="left"></div>
-          <div>{{sexTypes[sexInx]}}</div>
+          <div >{{sexTypes[sexInx]}} </div>
           <div class="icon-right" style="font-size:16px;color:#A0A0A0;margin-left:10rpx;"></div>
         </div>
       </picker>
@@ -28,14 +28,14 @@
       <div class="title">
         收货地址
       </div>
-      <div class="left text-cut">{{address?address:'选择送货地址'}}</div>
+      <div class="left text-cut">{{name?name:'选择送货地址'}}</div>
       <div class="icon-right" style="font-size:16px;color:#A0A0A0"></div>
     </div>
     <div class="line flex align-center bg-white">
       <div class="title">
         详细地址
       </div>
-      <input v-model="addressDetail" placeholder="详细地址-小区-栋-单元-层-室" class="left" />
+      <input v-model="address" placeholder="详细地址-小区-栋-单元-层-室" class="left" />
     </div>
 
     <bottom-bar :bar-height="120">
@@ -55,8 +55,8 @@ export default {
       sexInx: 0,
       sexTypes: ['先生', '女士'],
       address: '',
-
-      addressDetail: '',
+      consignee: '',
+      address: '',
       name: '',
       phone: '',
       
@@ -68,13 +68,8 @@ export default {
       if ((isRequired && isAllowed) || !isRequired) {
         try {
           let res = await wx.chooseLocation({})
-          console.log(res)
           let {latitude, longitude, address, name} = res
-          this.latitude = latitude
-          this.longitude = longitude
-          this.address = address
-          this.name = name
-          if (this.address.indexOf('昆明') == -1) {
+          if (address.indexOf('昆明') == -1) {
             this.$showModal({
               content: '暂时只在昆明开放配送业务！',
               showCancel: true,
@@ -83,7 +78,13 @@ export default {
                 wx.chooseLocation({})
               }
             })
+          } else {
+            this.latitude = latitude
+            this.longitude = longitude
+            this.address = address
+            this.name = name
           }
+          
         } catch(e) {
           this.locationTip()
         }
@@ -105,8 +106,24 @@ export default {
       })
     },
     onConfirm() {
+      if (!this.consignee) {
+        this.$toast('必须填写收货人姓名')
+        return
+      }
+      // if (!/^1\d[10]$/.test(this.phone)) {
+      //   this.$toast('填写正确的手机号码')
+      //   return
+      // }
+      if (!this.latitude||!this.longitude) {
+        this.$toast('还未选择配送地址')
+        return
+      }
+      if (!this.address) {
+        this.$toast('还未填写详细地址')
+        return
+      }
       let d = {
-        consignee: this.name,
+        consignee: this.consignee,
         longitude: this.longitude,
         latitude: this.latitude,
         phone: this.phone,
@@ -114,8 +131,17 @@ export default {
         area_id: 150124
       }
       this.$post('address/edit', d)
+        .then(r => {
+          this.$toast('操作成功')
+          this.$setStorage('address', r.data)
+          this.$store.commit('cart/setCurAddress', r.data)
+          setTimeout(_ => {
+            this.$go(1, 'back')
+          }, 1000)
+        })
     },
-  }
+  },
+  
 }
 </script>
 
@@ -134,5 +160,15 @@ export default {
   .title{
     width: 130rpx;
   }
+}
+
+.btn {
+  background: #ADC3E5;
+  height: 77rpx;
+  width: 700rpx;
+  color: #fff;
+  font-size: 12px;
+  border-radius: 12rpx;
+  line-height: 77rpx;
 }
 </style>

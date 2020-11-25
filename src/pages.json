@@ -79,6 +79,13 @@
 					"navigationBarTitleText": "test",
 					"navigationStyle": "default"
 				}
+			},
+			{
+				"path": "test/wave",
+				"style": {
+					"navigationBarTitleText": "wave",
+					"navigationStyle": "default"
+				}
 			}
 		]
 	}],

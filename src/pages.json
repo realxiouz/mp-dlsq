@@ -43,6 +43,13 @@
 			}
 		},
 		{
+			"path": "pages/order/success",
+			"style": {
+				"navigationStyle": "default",
+				"navigationBarTitleText": ""
+			}
+		},
+		{
 			"path": "pages/address/list",
 			"style": {
 				"navigationStyle": "default",
@@ -90,8 +97,8 @@
 		]
 	}],
 	"tabBar": {
-		"color": "#929292",
-		"selectedColor": "#F92F74",
+		"color": "#C3C3C3",
+		"selectedColor": "#ADC3E5",
 		"borderStyle": "black",
 		"backgroundColor": "#ffffff",
 		"list": [{

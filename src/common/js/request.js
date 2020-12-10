@@ -35,6 +35,15 @@ export const http = (url, data, method = 'post', showErrToast = true) => {
             if (data.data.code === 1) {
               resolve(data.data)
               return
+            } else {
+              reject(data.data)
+              if (showErrToast) {
+                uni.showToast({
+                  title: data.data.msg,
+                  icon: 'none',
+                })
+              }
+              return
             }
             break
           case 500:

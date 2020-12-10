@@ -3,7 +3,7 @@
     <div class="flex column align-center" style="width:100%;">
       <div class="color-primary" style="font-size:14px;">商城订单</div>
       <div style="color:#868787;margin-top:50rpx;font-size:8px;">支付剩余时间: {{'15:00'}}</div>
-      <div class="text-bold text-price" style="color:#060606;font-size:30px;margin:30rpx 0;">16.00</div>
+      <div class="text-bold text-price" style="color:#060606;font-size:30px;margin:30rpx 0;">{{totalPrice}}</div>
       <div class="flex align-center" style="color:#868787;font-size:10px;" @click="show=!show">
         查看订单详情 <div style="font-size:10px;margin-left:10rpx" :class="show?'icon-down':'icon-right'"></div>
       </div>
@@ -11,22 +11,16 @@
         <div class="flex line">
           订单号码: {{'11111111'}}
         </div>
-        <div class="flex line">
-          <div>大理山泉</div>
-          <div>袋装(10L)</div>
+        <div class="flex line" v-for="(i, inx) in cartGoods" :key="inx">
+          <div>{{i.title}}</div>
+          <div>{{i.subtitle}}</div>
           <div class="left"></div>
-          <div>X 1</div>
-        </div>
-        <div class="flex line">
-          <div>大理山泉</div>
-          <div>袋装(10L)</div>
-          <div class="left"></div>
-          <div>X 1</div>
+          <div>X {{i.goods_num}}</div>
         </div>
         <div class="flex line">
           <div>共计</div>
           <div class="left"></div>
-          <div>￥14.00</div>
+          <div>￥{{totalPrice}}</div>
         </div>
       </div>
 
@@ -63,6 +57,7 @@
 </template>
 
 <script>
+import { mapState, mapGetters } from 'vuex'
 export default {
   data() {
     return {
@@ -76,9 +71,53 @@ export default {
   methods: {
     onPay() {
       if (this.check0&&this.check2) {
-        this.$toast('todo...')
+        if (this.order_sn) {
+          this.payBySN()
+        } else {
+          let d = {
+            from: 'cart',
+            goods_list: this.cartGoods.map(i => {
+              i.dispatch_type = this.check1 ? 'store' : 'selfetch'
+              i.store_id = 1
+              return i
+            })
+          }
+          this.$post('order/createOrder', d)
+            .then(r => {
+              this.order_sn = r.data.order_sn
+              this.payBySN()
+            })
+        }
       }
+    },
+    payBySN() {
+      this.$post('pay/prepay', {
+        order_sn: this.order_sn,
+        payment: 'wechat'
+      }).then(res => {
+        let { nonceStr, paySign, signType, timeStamp} = res.data.pay_data
+        uni.requestPayment({
+          timeStamp,
+          nonceStr,
+          package: res.data.pay_data.package,
+          paySign,
+          signType,
+          success: (r) => {
+            this.$go(`/pages/order/success?t=${this.check1?1:2}`)
+          },
+          fail: (e) => {
+            console.log(e)
+          },
+          complete: _ => {
+
+          }
+        });
+      })
     }
+  },
+  computed:{
+    ...mapGetters('cart', ['totalCount', 'totalPrice']),
+    ...mapState('cart', ['cartGoods']),
   }
 }
 </script>

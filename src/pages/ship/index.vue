@@ -8,28 +8,16 @@
         <div style="font-size:14px;">我的存水</div>
       </div>
     </div>
-    <div class="ship-line flex align-center bg-white">
+    <div class="ship-line flex align-center bg-white" v-for="(i, inx) in list" :key="inx">
       <div class="img-wrap">
-        <img src="/static/img/water.jpg" style="width:100%;height:100%;" />
+        <img :src="i.goods_image" style="width:100%;height:100%;" />
       </div>
       <div class="left">
         <div style="color:#010101;font-size:10px;">大理山泉 瓶装(4.2L)</div>
       </div>
       <div class="flex column align-center">
         <div class="color-primary" style="font-size:10px;margin-bottom:24rpx;">配送数量</div>
-        <goods-number w="190rpx"/>
-      </div>
-    </div>
-    <div class="ship-line flex align-center bg-white">
-      <div class="img-wrap">
-        <img src="/static/img/water.jpg" style="width:100%;height:100%;" />
-      </div>
-      <div class="left">
-        <div style="color:#010101;font-size:10px;">大理山泉 瓶装(4.2L)</div>
-      </div>
-      <div class="flex column align-center">
-        <div class="color-primary" style="font-size:10px;margin-bottom:24rpx;">配送数量</div>
-        <goods-number w="190rpx"/>
+        <ship-number w="190rpx" v-model="i.total_num" :max="i.max"/>
       </div>
     </div>
     <div class="ship-line flex align-center bg-white">
@@ -84,8 +72,22 @@
 </template>
 
 <script>
+import shipNumber from '@/components/shipNumber'
 export default {
   onLoad(opt) {
+  },
+  onShow() {
+    this.$showLoading()
+    this.$get('order/deposit')
+      .then(r => {
+        this.list = r.data.map(i => {
+          i.max = i.total_num
+          return i
+        })
+      })
+      .finally(_ => {
+        this.$hideLoading()
+      })
   },
   data() {
     return {
@@ -93,6 +95,8 @@ export default {
       types: ['实时配送', '预约配送'],
       selDate: '',
       selTime: '',
+
+      list: [],
     }
   },
   methods: {
@@ -113,6 +117,9 @@ export default {
     onTimeChange(e) {
       this.selTime = e.detail.value
     }
+  },
+  components: {
+    shipNumber
   }
 }
 </script>

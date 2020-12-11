@@ -41,7 +41,7 @@ const NAVS = [
   {
     img: '/static/img/water.jpg',
     name: '存水管理',
-    path: '/pages/water/list'
+    path: '/pages/ship/index'
   },
   {
     img: '/static/img/water.jpg',

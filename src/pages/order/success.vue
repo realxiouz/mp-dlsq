@@ -1,8 +1,8 @@
 <template>
   <div class="flex column align-center">
     <div style="color:#060606;font-size:18px;margin-top:260rpx;">支付成功</div>
-    <img style="width:288rpx;height:186rpx;margin-top:60rpx;" src="" alt="">
-    <div style="margin-top:60rpx;" class="flex">
+    <img style="width:288rpx;height:288rpx;" src="/static/img/success.png" alt="">
+    <div style="margin-top:20rpx;" class="flex">
       <div v-for="i in 3" :key="i" class="circle" :class="{dot: (i==0&&count<=3)||(i==1&&count<=2)||(i==2&&count<=1)}"></div>
     </div>
     <div style="color:#060606;font-size:14px;margin-top:50rpx;">{{count}}秒后将为您跳转至{{orderType==1?'配送界面':'首页界面'}}</div>

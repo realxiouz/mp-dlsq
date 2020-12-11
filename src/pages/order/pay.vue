@@ -41,6 +41,7 @@
 
       <div class="flex align-center" style="width:670rpx;margin-top:10rpx" @click="check2=!check2">
         <div style="width:88rpx">
+          <img src="/static/img/wepay.png" style="width:50rpx;height:50rpx;" alt="">
         </div>
         <div class="">微信支付</div>
         <div class="left"></div>

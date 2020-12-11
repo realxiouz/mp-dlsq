@@ -11,7 +11,13 @@
         </div>
         <div class="text-bold text-price color-primary" style="font-size: 14px;">{{curSku.price}}</div>
       </div>
-      <div class="left"></div>
+      <div class="left" style="color:#2D2D2D;font-size:10px;width:100%;padding-top:30rpx;">
+        <div class="flex">
+          <div style="width:50%" v-for="(i, inx) in curSku.params" :key="inx">
+            {{`${i.title}:${i.content}`}}
+          </div>
+        </div>
+      </div>
       <div class="flex">
         <div class="color-primary" style="font-size:12px;">购买数量</div>
         <div class="left"></div>
@@ -32,7 +38,7 @@ export default {
     this.$post('goods/detail', {
       id: opt.id
     }).then(r => {
-      let {title, subtitle, image, sku_price, id} = r.data
+      let {title, subtitle, image, sku_price, id, params} = r.data
       this.curSku= {
         goods_id: id,
         sku_price_id: sku_price[0].id,
@@ -40,6 +46,7 @@ export default {
         image,
         title,
         subtitle,
+        params,
       }
     })
       .finally(_ => {

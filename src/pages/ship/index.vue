@@ -13,7 +13,7 @@
         <img :src="i.goods_image" style="width:100%;height:100%;" />
       </div>
       <div class="left">
-        <div style="color:#010101;font-size:10px;">大理山泉 瓶装(4.2L)</div>
+        <div style="color:#010101;font-size:10px;">{{i.goods_title}}</div>
       </div>
       <div class="flex column align-center">
         <div class="color-primary" style="font-size:10px;margin-bottom:24rpx;">配送数量</div>
@@ -21,7 +21,8 @@
       </div>
     </div>
     <div class="ship-line flex align-center bg-white">
-      <div class="img-wrap1">
+      <div class="img-wrap1 flex align-center justify-center">
+        <img src="/static/img/time.png" style="width:44rpx;height:44rpx;" alt="">
       </div>
       <picker class="left" :range="types" @change="onTypeChange" :value="typeInx">
         <div class="flex align-center">
@@ -31,7 +32,7 @@
       </picker>
     </div>
     <div class="ship-line flex align-center bg-white" v-if="typeInx==1">
-      <div class="img-wrap1">
+      <div class="img-wrap1 flex align-center justify-center">
       </div>
       <picker class="left" :range="types" @change="onDateChange" :value="selDate" mode="date">
         <div class="flex align-center">
@@ -55,7 +56,8 @@
       </picker>
     </div>
     <div class="ship-line flex align-center bg-white" @click="$go('/pages/address/list')">
-      <div class="img-wrap1">
+      <div class="img-wrap1 flex align-center justify-center">
+        <img src="/static/img/loc.png" style="width:44rpx;height:44rpx;" alt="">
       </div>
       <div class="left" style="color:#010101;font-size:10px;line-height:80rpx;">
         选择配送地址

@@ -1,13 +1,13 @@
 <template>
-  <div>
-    <div style="background:#5077a9;height:600rpx" class="pos-r">
+  <div style="height:100vh;" class="pos-r">
+    <div style="background:#5077a9;height:500rpx" class="pos-r">
       <div :style="{height: `${navBarHeight}px`}"></div>
-      <div class="flex column align-center" style="padding-top:100rpx;">
+      <div class="flex column align-center" >
         <div style="width:180rpx;height:180rpx;background:rgba(255,255,255,.4);border-radius:50%;" class="pos-r">
           <img
             class="pos-a"
             style="width:132rpx;height:132rpx;border-radius:50%;top:50%;left:50%;margin-left:-66rpx;margin-top:-66rpx;"
-            :src="info.id?info.avatar:'/static/img/water.jpg'"
+            :src="info.id?info.avatar:'/static/img/default.jpg'"
           />
         </div>
         <div style="margin-top:16rpx">
@@ -24,14 +24,16 @@
 			</div>
     </div>
     
-    <div class="bg-white flex" style="margin-top:60rpx;border-radius:16rpx;">
+    <div class="bg-white flex" style="margin-top:60rpx;border-radius:16rpx;box-shadow: 0px 11px 44px 0px rgba(0, 0, 0, 0.09);">
       <div v-for="(i, inx) in navs" :key="inx" class="left flex align-center justify-around" style="height:144rpx;" @click="onNav(i)">
         <div class="color-primary font10 flex align-center column">
-          <img style="width:48rpx;height:48rpx;margin-bottom:14rpx;" :src="i.img" alt="">
+          <img style="width:48rpx;height:48rpx;margin-bottom:6rpx;" :src="i.img" alt="">
           <div>{{i.name}}</div>
         </div>
       </div>
     </div>
+
+
   </div>
 </template>
 
@@ -39,22 +41,22 @@
 import { mapState } from 'vuex'
 const NAVS = [
   {
-    img: '/static/img/water.jpg',
+    img: '/static/img/me0.png',
     name: '存水管理',
     path: '/pages/ship/index'
   },
   {
-    img: '/static/img/water.jpg',
+    img: '/static/img/me1.png',
     name: '地址管理',
     path: '/pages/address/list'
   },
   {
-    img: '/static/img/water.jpg',
+    img: '/static/img/me2.png',
     name: '购水记录',
     path: '/pages/history/order'
   },
   {
-    img: '/static/img/water.jpg',
+    img: '/static/img/me3.png',
     name: '配送记录',
     path: '/pages/history/ship'
   },

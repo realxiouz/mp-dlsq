@@ -2,8 +2,9 @@
   <div class="cart-wrap ">
     <div class="flex pos-r" style="z-index:1111;">
       <div class="left flex align-center bg-primary" style="height:100rpx;">
-        <div style="width:72rpx;height:58rpx;margin: 0 24rpx 0 36rpx">
+        <div style="width:72rpx;height:58rpx;margin: 0 24rpx 0 36rpx" class="pos-r">
           <img src="/static/img/cart.png" style="width:100%;height:100%;"  />
+          <div class="pos-a badge" style="" v-if="totalCount">{{totalCount}}</div>
         </div>
         <div style="font-size:12px;margin-right:24rpx;">购物车</div>
         <div style="height:48rpx;width:2rpx;background:#fff;"></div>
@@ -45,8 +46,9 @@
             </div>
           </div>
         </scroll-view>
-        <div class="color-primary flex align-center justify-around" style="height:76rpx;border-top: 1rpx solid #ADC3E5;font-size:10px;">
-          <div @click.stop="onClear">清空购物车</div>
+        <div class="color-primary flex align-center justify-center" style="height:76rpx;border-top: 1rpx solid #ADC3E5;font-size:10px;" @click.stop="onClear">
+          <img src="/static/img/del.png" style="width:24rpx;height:24rpx;margin-right:20rpx" />
+          <div >清空购物车</div>
         </div>
       </div>
     </modal>
@@ -108,5 +110,18 @@ export default {
   .cart-item{
     padding: 30rpx 0;
   }
+}
+
+.badge{
+  width: 24rpx;
+  height: 24rpx;
+  border-radius: 12rpx;
+  color: #fff;
+  background: #EB6877;
+  text-align: center;
+  line-height: 24rpx;
+  font-size: 10px;
+  top: -12rpx;
+  right: -12rpx;
 }
 </style>

@@ -2,7 +2,7 @@
   <div >
     <div class="sticky bg-primary font14 text-center pos-r" style="line-height:100rpx;">
       地址管理
-      <img @click.stop="isEdit=!isEdit" v-if="list.length" class="pos-a" style="width:60rpx;height:60rpx;top:20rpx;right:60rpx" src="/static/img/right-blue.png" alt="">
+      <img @click.stop="isEdit=!isEdit" v-if="list.length" class="pos-a" style="width:60rpx;height:60rpx;top:20rpx;right:60rpx" src="/static/img/setting.png" alt="">
     </div>
     <div class="font12 flex align-center justify-center" style="height:90rpx;color:#BCD0EB">
       我的收货地址
@@ -14,7 +14,10 @@
         style="font-size:36rpx;left:42rpx;top:55rpx;"
         class="pos-a"
         :class="i.check?'color-primary icon-check':'icon-uncheck color-gray'"></div>
-      <img style="width:55rpx;height:55rpx;margin:0 48rpx 0 120rpx;" src="/static/img/wepay.png" alt="">
+      <div class="pos-r flex align-center justify-around" style="width:55rpx;height:55rpx;margin:0 48rpx 0 120rpx;">
+        <img class="pos-a" style="width:55rpx;height:55rpx;" src="/static/img/house.png" alt="">
+        <div style="color:#97B5E5" class="text-bold">{{inx+1}}</div>
+      </div>
       <div class="font12 left" style="color:#333;">
         <div class="flex">{{i.address}} <div v-if="curAddress.id==i.id">已选择</div></div>
         <div>{{`${i.consignee} ${i.phone}`}}</div>
@@ -22,8 +25,10 @@
     </div>
     <bottom-bar :bar-height="120">
       <div style="height:120rpx" class="flex align-center justify-around">
-        <div v-if="!isEdit" class="btn text-center" @click="$go('/pages/address/detail')">添加地址</div>
-        <div v-else class="btn text-center" style="background:#E598A4;" @click="onDel">删除地址</div>
+        <div v-if="!isEdit" class="add-btn flex align-center justify-center" @click="$go('/pages/address/detail')">
+         <img src="/static/img/add.png" style="width:40rpx;height:40rpx;margin-right:16rpx;" alt=""> 添加地址</div>
+        <div v-else class="btn flex align-center justify-center" style="background:#E598A4;" @click="onDel">
+          <img src="/static/img/close.png" style="width:40rpx;height:40rpx;margin-right:16rpx;" alt="">删除地址</div>
       </div>
     </bottom-bar>
   </div>
@@ -62,7 +67,7 @@ export default {
       this.$forceUpdate()
     },
     onDel() {
-      let arr = this.list.filter(i => i.check)
+      let arr = this.list.filter(i => i.check).map(i => i.id)
       if (!arr.length) {
         this.$toast('还没有选择删除的地址')
       } else {
@@ -70,7 +75,12 @@ export default {
           content: '确定要删除选定的地址么?',
           showCancel: true,
           successCb: _ => {
-            this.$toast('todo')
+            this.$del('address/del', {
+              id: arr
+            })
+              .then(r => {
+
+              })
           }
         })
       }
@@ -88,6 +98,16 @@ export default {
   font-size: 12px;
   border-radius: 12rpx;
   line-height: 77rpx;
+}
+
+.add-btn{
+  background: #fff;
+  height: 77rpx;
+  width: 700rpx;
+  border: 1rpx solid #5677AB;
+  color: #5677AB;
+  font-size: 12px;
+  border-radius: 10rpx;
 }
 .address-item{
   height: 150rpx;

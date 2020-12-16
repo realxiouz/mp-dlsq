@@ -17,7 +17,7 @@
       </div>
       <div class="flex column align-center">
         <div class="color-primary" style="font-size:10px;margin-bottom:24rpx;">配送数量</div>
-        <ship-number w="190rpx" v-model="i.total_num" :max="i.max"/>
+        <ship-number w="190rpx" v-model="i.goods_num" :max="i.max"/>
       </div>
     </div>
     <div class="ship-line flex align-center bg-white">
@@ -65,9 +65,9 @@
       <div class="icon-right" style="font-size:16px;color:#A0A0A0"></div>
     </div>
 
-    <bottom-bar :bar-height="100">
-      <div style="height:100rpx;">
-        
+    <bottom-bar :bar-height="120">
+      <div style="height:120rpx" class="flex align-center justify-around">
+        <div class="btn flex align-center justify-center" @click="onConfirm">发起配送</div>
       </div>
     </bottom-bar>
   </div>
@@ -75,6 +75,8 @@
 
 <script>
 import shipNumber from '@/components/shipNumber'
+import dayjs from 'dayjs'
+
 export default {
   onLoad(opt) {
   },
@@ -83,7 +85,7 @@ export default {
     this.$get('order/deposit')
       .then(r => {
         this.list = r.data.map(i => {
-          i.max = i.total_num
+          i.max = i.goods_num
           return i
         })
       })
@@ -103,13 +105,6 @@ export default {
   },
   methods: {
     
-    onChaoose() {
-      wx.chooseLocation({
-        success: r => {
-          console.log(r)
-        }
-      })
-    },
     onTypeChange(e) {
       this.typeInx = e.detail.value
     },
@@ -118,6 +113,24 @@ export default {
     },
     onTimeChange(e) {
       this.selTime = e.detail.value
+    },
+    onConfirm() {
+      let d = {
+        address_id: 10,
+        from: 'cart',
+        goods_list: this.list.map(i => ({
+          sku_price_id: i.goods_sku_price_id,
+          goods_id: i.goods_id,
+          goods_num: i.goods_num,
+          dispatch_date: this.typeInx == 0 ? dayjs(new Date()).format('YYYY-MM-DD HH:mm') : `${this.selDate} ${this.selTime}`,
+          dispatch_phone: '15912510617'
+        }))
+      }
+      console.log(d)
+      this.$post('order/delivery', d)
+        .then(r => {
+
+        })
     }
   },
   components: {
@@ -145,5 +158,15 @@ export default {
     height: 80rpx;
     margin-right: 36rpx;
   }
+}
+
+.btn {
+  background: #ADC3E5;
+  height: 77rpx;
+  width: 700rpx;
+  color: #fff;
+  font-size: 12px;
+  border-radius: 12rpx;
+  line-height: 77rpx;
 }
 </style>

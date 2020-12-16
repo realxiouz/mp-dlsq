@@ -128,7 +128,7 @@ export default {
         latitude: this.latitude,
         phone: this.phone,
         address: this.address,
-        area_id: 150124
+        area_id: "530102"
       }
       this.$post('address/edit', d)
         .then(r => {

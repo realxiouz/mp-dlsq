@@ -34,17 +34,7 @@ import { mapState } from 'vuex'
 
 export default {
   onShow() {
-    this.$showLoading()
-    this.$post('address')
-      .then(r => {
-        this.list = r.data.map(i => {
-          i.check = false
-          return i
-        })
-      })
-      .finally(_ => {
-        this.$hideLoading()
-      })
+    this.getData()
   },
   data() {
     return {
@@ -61,6 +51,19 @@ export default {
       i.check = !i.check
       this.$forceUpdate()
     },
+    getData() {
+      this.$showLoading()
+      this.$post('address')
+        .then(r => {
+          this.list = r.data.map(i => {
+            i.check = false
+            return i
+          })
+        })
+        .finally(_ => {
+          this.$hideLoading()
+        })
+    },
     onDel() {
       let arr = this.list.filter(i => i.check)
       if (!arr.length) {
@@ -70,7 +73,12 @@ export default {
           content: '确定要删除选定的地址么?',
           showCancel: true,
           successCb: _ => {
-            this.$toast('todo')
+            this.$del('address/del', {
+              id: arr.map(i => i.id)
+            }).then(r => {
+              this.getData()
+              this.isEdit = false
+            })
           }
         })
       }

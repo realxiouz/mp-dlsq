@@ -7,7 +7,7 @@
           <img
             class="pos-a"
             style="width:132rpx;height:132rpx;border-radius:50%;top:50%;left:50%;margin-left:-66rpx;margin-top:-66rpx;"
-            :src="info.id?info.avatar:'/static/img/default.jpg'"
+            :src="info.id?info.avatar:'/static/img/default.png'"
           />
         </div>
         <div style="margin-top:16rpx">

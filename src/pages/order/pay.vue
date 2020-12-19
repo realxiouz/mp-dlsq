@@ -75,8 +75,18 @@ export default {
         if (this.order_sn) {
           this.payBySN()
         } else {
+          if (!this.curAddress.id && this.check1) {
+            this.$showModal({
+              content: '还没有选择配送地址,点击确定去选择',
+              successCb: _ => {
+                this.$go('/pages/address/list')
+              }
+            })
+            return
+          }
           let d = {
             from: 'cart',
+            address_id: this.curAddress.id,
             goods_list: this.cartGoods.map(i => {
               i.dispatch_type = this.check1 ? 'store' : 'selfetch'
               i.store_id = 1
@@ -118,7 +128,7 @@ export default {
   },
   computed:{
     ...mapGetters('cart', ['totalCount', 'totalPrice']),
-    ...mapState('cart', ['cartGoods']),
+    ...mapState('cart', ['cartGoods', 'curAddress']),
   }
 }
 </script>

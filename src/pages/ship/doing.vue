@@ -1,8 +1,12 @@
 <template>
   <div class="flex column" style="height:100vh;">
-    <map class="left" id="map" :longitude="longitude" :latitude="latitude" :markers="markers" :polyline="polyline">
-      <cover-image src="/static/img/back-fix.png" class="back" @click.stop="$go(1, 'back')"/>
-    </map>
+    <div class="left pos-r" style="width:750rpx;">
+      <map  id="map" :longitude="longitude" :latitude="latitude" :markers="markers" :polyline="polyline">
+        <cover-image src="/static/img/back-fix.png" class="back" @click.stop="$go(1, 'back')"/>
+      </map>
+
+      <cover-image src="/static/img/refresh.png" class="pos-a" style="width:60rpx;height:60rpx;bottom:40rpx;left:40rpx;" @click="onRefresh" />
+    </div>
     <div class="ship-info bg-white">
       <div style="padding:30rpx 0;" class="font14">
         <div>预计<span style="color:#FFCE50">{{'10:20'}}</span>送达</div>
@@ -44,7 +48,7 @@
         <div style="height:20rpx;"></div>
       </div>
       <div class="flex align-center" style="padding:24rpx 0" @click="onTel">
-        <img style="width:56rpx;height:56rpx;" src="" alt="">
+        <img style="width:56rpx;height:56rpx;" src="/static/img/phone.png" alt="">
         <div style="margin-left:100rpx;color:#494949">联系配送人员</div>
       </div>
     </div>
@@ -97,6 +101,15 @@ export default {
       wx.makePhoneCall({
         phoneNumber: '10086'
       })
+    },
+    onRefresh() {
+      console.log(1)
+      this.$get('/order/locationList', {
+        order_id: 2
+      })
+        .then(r => {
+
+        })
     }
   }
 }
@@ -104,7 +117,8 @@ export default {
 
 <style lang="less">
 #map{
-  width: 750rpx;
+  width: 100%;
+  height: 100%;
 }
 
 .back{

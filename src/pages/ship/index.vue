@@ -1,8 +1,13 @@
 <template>
   <div>
     <div class="sticky">
-      <div class="bg-bold doing  flex align-center justify-around" @click="$go(`/pages/ship/doing`)">
-        <div style="font-size:12px;">正在进行的配送</div>
+      <div v-if="shipList.length" class="bg-bold doing  flex align-center justify-center" style="width:100%;" >
+        <div class="pos-r" style="margin-right:40rpx;">
+          <img style="width:48rpx;height:48rpx" src="/static/img/shiping.png" alt="">
+        </div>
+        <picker :range="shipList" range-key="order_sn" @change="onOrderChange">
+          <div style="font-size:12px;">正在进行的配送</div>
+        </picker>
       </div>
       <div class="bg-primary doing flex align-center justify-center">
         <img style="width:36rpx;height:36rpx;margin-right:12rpx;" src="/static/img/cz.png" alt="">
@@ -86,16 +91,19 @@ export default {
   },
   onShow() {
     this.$showLoading()
-    this.$get('order/deposit')
-      .then(r => {
-        this.list = r.data.map(i => {
-          i.max = i.goods_num
-          return i
-        })
+    Promise.all([
+      this.$get('order/deposit'),
+      this.$get('order/index?type=noget&order_type=delivery')
+    ]).then(r => {
+      this.list = r[0].data.map(i => {
+        i.max = i.goods_num
+        return i
       })
-      .finally(_ => {
-        this.$hideLoading()
-      })
+      let {data = []} = r[1].data
+      this.shipList = data
+    }).finally(_ => {
+      this.$hideLoading()
+    })
   },
   data() {
     return {
@@ -105,6 +113,8 @@ export default {
       selTime: '',
 
       list: [],
+
+      shipList: [],
     }
   },
   methods: {
@@ -139,6 +149,11 @@ export default {
         .then(r => {
 
         })
+    },
+    onOrderChange(e) {
+      let id = this.shipList[e.detail.value].id
+      console.log(id)
+      this.$go(`/pages/ship/doing?id=${id}`)
     }
   },
   components: {

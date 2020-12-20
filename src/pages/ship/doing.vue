@@ -16,9 +16,9 @@
         <div class="line flex">
           <div class="title">配送清单</div>
           <div class="left">
-            <div class="flex justify-between in-line" v-for="(j) in 4" :key="j">
-              <div>大理山泉</div>
-              <div>X 5</div>
+            <div class="flex justify-between in-line" v-for="(j, inx) in orderInfo.item" :key="inx">
+              <div>{{j.goods_title}}</div>
+              <div>X {{j.goods_num}}</div>
             </div>
           </div>
         </div>
@@ -31,8 +31,8 @@
           <div class="title">配送地址</div>
           <div class="left"></div>
           <div>
-            <div>摩玛大厦2期A座708室</div>
-            <div>李先生 13669727535</div>
+            <div>{{orderInfo.address}}</div>
+            <div>{{`${orderInfo.consignee} ${orderInfo.phone}`}}</div>
           </div>
         </div>
         <div class="line flex">
@@ -43,7 +43,7 @@
         <div class="line flex">
           <div class="title">配送单号</div>
           <div class="left"></div>
-          <div>202010271006</div>
+          <div>{{orderInfo.order_sn}}</div>
         </div>
         <div style="height:20rpx;"></div>
       </div>
@@ -59,7 +59,9 @@
 import { getWxAuthSetting } from '@/common/js/utils'
 export default {
   async onLoad(opt) {
-    
+    this.id = opt.id
+    this.getData()
+    this.getLocations()
   },
   async onShow() {
     let {isRequired, isAllowed} = await getWxAuthSetting('userLocation')
@@ -94,6 +96,10 @@ export default {
       latitude: '',
       markers: [],
       polyline: [],
+
+      orderInfo: {
+        item: [],
+      }
     }
   },
   methods: {
@@ -103,13 +109,37 @@ export default {
       })
     },
     onRefresh() {
-      console.log(1)
-      this.$get('/order/locationList', {
-        order_id: 2
-      })
+      this.getLocations()
+    },
+    getData() {
+      let d = {
+        type: 'nosend',
+        store_id: 1,
+        order_type: 'delivery',
+        order_id: this.id,
+      }
+      this.$get('store/order/detail', d)
         .then(r => {
-
+          this.orderInfo = r.data
         })
+    },
+    getLocations() {
+      this.$get('order/locationList', {
+        order_id: this.id
+      }).then(r => {
+        this.polyline = [
+          {
+            points: r.data.map(i => ({
+              latitude: i.lat,
+              longitude: i.lng,
+            })),
+            color: '#496BA0',
+            width: 12
+          },
+
+        ]
+        console.log(this.polyline)
+      })
     }
   }
 }

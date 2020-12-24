@@ -14,7 +14,7 @@
       </div>
     </div>
     <div class="flex justify-around" style="height:145rpx">
-      <div v-for="(i,inx) in icons" :key="inx" class="flex column align-center">
+      <div v-for="(i,inx) in icons" :key="inx" class="flex column align-center" @click="checkRt(i)">
         <img :src="i.image" style="width:48rpx;height:48rpx">
         <div style="color:#000;font-size:8px;">{{i.name}}</div>
       </div>
@@ -65,6 +65,12 @@ export default {
     onBannerChange(e) {
       console.log(e.detail.current)
       // this.bannerInx = e.detail.current
+    },
+    checkRt(i) {
+      if (i.path.indexOf('richtext') > -1) {
+        let id = i.path.split('?')[1].split('=')[1]
+        this.$go(`/pages/rt/index?id=${id}`)
+      }
     }
   }
 }

@@ -114,6 +114,7 @@ export default {
           paySign,
           signType,
           success: (r) => {
+            this.$store.dispatch('cart/updateCart')
             this.$go(`/pages/order/success?t=${this.check1?1:2}`)
           },
           fail: (e) => {

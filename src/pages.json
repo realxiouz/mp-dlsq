@@ -75,6 +75,13 @@
 				"navigationStyle": "default",
 				"navigationBarTitleText": "购水记录"
 			}
+		},
+		{
+			"path": "pages/rt/index",
+			"style": {
+				"navigationStyle": "default",
+				"navigationBarTitleText": ""
+			}
 		}
 	],
 	"subPackages": [{

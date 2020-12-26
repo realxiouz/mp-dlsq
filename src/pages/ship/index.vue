@@ -14,70 +14,78 @@
         <div style="font-size:14px;"> 我的存水</div>
       </div>
     </div>
-    <div class="ship-line flex align-center bg-white" v-for="(i, inx) in list" :key="inx">
-      <div class="img-wrap">
-        <img :src="i.goods_image" style="width:100%;height:100%;" />
-      </div>
-      <div class="left">
-        <div style="color:#010101;font-size:10px;">{{i.goods_title}}</div>
-      </div>
-      <div class="flex column align-center">
-        <div class="color-primary" style="font-size:10px;margin-bottom:24rpx;">配送数量</div>
-        <ship-number w="190rpx" v-model="i.goods_num" :max="i.max"/>
-      </div>
-    </div>
-    <div class="ship-line flex align-center bg-white">
-      <div class="img-wrap1 flex align-center justify-center">
-        <img src="/static/img/time.png" style="width:44rpx;height:44rpx;" alt="">
-      </div>
-      <picker class="left" :range="types" @change="onTypeChange" :value="typeInx">
-        <div class="flex align-center">
-          <div class="left" style="color:#010101;font-size:10px;line-height:80rpx;">{{typeInx>=0?types[typeInx]:'选择配送类型'}}</div>
-          <div class="icon-right" style="font-size:16px;color:#A0A0A0"></div>
+    <template v-if="list.length">
+      <div class="ship-line flex align-center bg-white" v-for="(i, inx) in list" :key="inx">
+        <div class="img-wrap">
+          <img :src="i.goods_image" style="width:100%;height:100%;" />
         </div>
-      </picker>
-    </div>
-    <div class="ship-line flex align-center bg-white" v-if="typeInx==1">
-      <div class="img-wrap1 flex align-center justify-center">
-        <img src="/static/img/time.png" style="width:44rpx;height:44rpx;" alt="">
+        <div class="left">
+          <div style="color:#010101;font-size:10px;">{{i.goods_title}}</div>
+        </div>
+        <div class="flex column align-center">
+          <div class="color-primary" style="font-size:10px;margin-bottom:24rpx;">配送数量</div>
+          <ship-number w="190rpx" v-model="i.goods_num" :max="i.max"/>
+        </div>
       </div>
-      <picker class="left" :range="types" @change="onDateChange" :value="selDate" mode="date">
-        <div class="flex align-center">
-          <div class="left" style="color:#010101;font-size:10px;line-height:80rpx;">
-            {{!selDate?'选择配送日期':`选择的日期: ${selDate}`}}
+      <div class="ship-line flex align-center bg-white">
+        <div class="img-wrap1 flex align-center justify-center">
+          <img src="/static/img/time.png" style="width:44rpx;height:44rpx;" alt="">
+        </div>
+        <picker class="left" :range="types" @change="onTypeChange" :value="typeInx">
+          <div class="flex align-center">
+            <div class="left" style="color:#010101;font-size:10px;line-height:80rpx;">{{typeInx>=0?types[typeInx]:'选择配送类型'}}</div>
+            <div class="icon-right" style="font-size:16px;color:#A0A0A0"></div>
           </div>
-          <div class="icon-right" style="font-size:16px;color:#A0A0A0"></div>
-        </div>
-      </picker>
-    </div>
-    <div class="ship-line flex align-center bg-white" v-if="typeInx==1">
-      <div class="img-wrap1 flex align-center justify-center">
-        <img src="/static/img/time.png" style="width:44rpx;height:44rpx;" alt="">
+        </picker>
       </div>
-      <picker class="left" :range="types" @change="onTimeChange" :value="selTime" mode="time">
-        <div class="flex align-center">
-          <div class="left" style="color:#010101;font-size:10px;line-height:80rpx;">
-            {{!selDate?'选择配送时间':`选择的时间: ${selTime}`}}
+      <div class="ship-line flex align-center bg-white" v-if="typeInx==1">
+        <div class="img-wrap1 flex align-center justify-center">
+          <img src="/static/img/time.png" style="width:44rpx;height:44rpx;" alt="">
+        </div>
+        <picker class="left" :range="types" @change="onDateChange" :value="selDate" mode="date">
+          <div class="flex align-center">
+            <div class="left" style="color:#010101;font-size:10px;line-height:80rpx;">
+              {{!selDate?'选择配送日期':`选择的日期: ${selDate}`}}
+            </div>
+            <div class="icon-right" style="font-size:16px;color:#A0A0A0"></div>
           </div>
-          <div class="icon-right" style="font-size:16px;color:#A0A0A0"></div>
+        </picker>
+      </div>
+      <div class="ship-line flex align-center bg-white" v-if="typeInx==1">
+        <div class="img-wrap1 flex align-center justify-center">
+          <img src="/static/img/time.png" style="width:44rpx;height:44rpx;" alt="">
         </div>
-      </picker>
-    </div>
-    <div class="ship-line flex align-center bg-white" @click="$go('/pages/address/list')">
-      <div class="img-wrap1 flex align-center justify-center">
-        <img src="/static/img/loc.png" style="width:44rpx;height:44rpx;" alt="">
+        <picker class="left" :range="types" @change="onTimeChange" :value="selTime" mode="time">
+          <div class="flex align-center">
+            <div class="left" style="color:#010101;font-size:10px;line-height:80rpx;">
+              {{!selDate?'选择配送时间':`选择的时间: ${selTime}`}}
+            </div>
+            <div class="icon-right" style="font-size:16px;color:#A0A0A0"></div>
+          </div>
+        </picker>
       </div>
-      <div class="left" style="color:#010101;font-size:10px;line-height:80rpx;">
-        {{curAddress.id?curAddress.address:'选择配送地址'}}
+      <div class="ship-line flex align-center bg-white" @click="$go('/pages/address/list')">
+        <div class="img-wrap1 flex align-center justify-center">
+          <img src="/static/img/loc.png" style="width:44rpx;height:44rpx;" alt="">
+        </div>
+        <div class="left" style="color:#010101;font-size:10px;line-height:80rpx;">
+          {{curAddress.id?curAddress.address:'选择配送地址'}}
+        </div>
+        <div class="icon-right" style="font-size:16px;color:#A0A0A0"></div>
       </div>
-      <div class="icon-right" style="font-size:16px;color:#A0A0A0"></div>
-    </div>
 
-    <bottom-bar :bar-height="120">
-      <div style="height:120rpx" class="flex align-center justify-around">
-        <div class="btn flex align-center justify-center" :class="{dis}" @click="onConfirm">发起配送</div>
+      <bottom-bar :bar-height="120">
+        <div style="height:120rpx" class="flex align-center justify-around">
+          <div class="btn flex align-center justify-center" :class="{dis}" @click="onConfirm">发起配送</div>
+        </div>
+      </bottom-bar>
+    </template>
+    <template v-else>
+      <div class="flex column align-center">
+        <div class="font12" style="color:#0606060;margin:120rpx 0 80rpx">我的存水空空如也，请移步商城购水后方可查看。</div>
+        <img style="width:323rpx;height:323rpx;" src="/static/img/empty-w.png" alt="">
       </div>
-    </bottom-bar>
+    </template>
   </div>
 </template>
 
@@ -95,7 +103,7 @@ export default {
       this.$get('order/deposit'),
       this.$get('order/index?type=noget&order_type=delivery')
     ]).then(r => {
-      this.list = r[0].data.map(i => {
+      this.list = r[0].data.filter(i => i.goods_num).map(i => {
         i.max = i.goods_num
         return i
       })
@@ -130,7 +138,6 @@ export default {
     },
     onConfirm() {
       if (this.dis) {
-        console.log(111)
         return
       }
       let d = {
@@ -144,15 +151,18 @@ export default {
           dispatch_phone: this.curAddress.phone
         }))
       }
-      console.log(d)
       this.$post('order/delivery', d)
         .then(r => {
-
+          this.$showModal({
+            content: '下单成功,等待配送员配送',
+            successCb: _ => {
+              this.$go('/pages/shop/index', 'switch')
+            }
+          })
         })
     },
     onOrderChange(e) {
       let id = this.shipList[e.detail.value].id
-      console.log(id)
       this.$go(`/pages/ship/doing?id=${id}`)
     }
   },

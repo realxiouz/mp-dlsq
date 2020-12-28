@@ -21,10 +21,11 @@
         </div>
         <div class="left">
           <div style="color:#010101;font-size:10px;">{{i.goods_title}}</div>
+          <div style="font-size:10px;" :style="{color: i.goods_num<=1 ? '#EB6877' :'#5677AB'}">库存: {{i.goods_num}}</div>
         </div>
         <div class="flex column align-center">
           <div class="color-primary" style="font-size:10px;margin-bottom:24rpx;">配送数量</div>
-          <ship-number w="190rpx" v-model="i.goods_num" :max="i.max"/>
+          <ship-number w="190rpx" v-model="i.count" :max="i.max"/>
         </div>
       </div>
       <div class="ship-line flex align-center bg-white">
@@ -104,6 +105,7 @@ export default {
       this.$get('order/index?type=noget&order_type=delivery')
     ]).then(r => {
       this.list = r[0].data.filter(i => i.goods_num).map(i => {
+        i.count = 1
         i.max = i.goods_num
         return i
       })
@@ -146,7 +148,7 @@ export default {
         goods_list: this.list.map(i => ({
           sku_price_id: i.goods_sku_price_id,
           goods_id: i.goods_id,
-          goods_num: i.goods_num,
+          goods_num: i.count,
           dispatch_date: this.typeInx == 0 ? dayjs(new Date()).format('YYYY-MM-DD HH:mm') : `${this.selDate} ${this.selTime}`,
           dispatch_phone: this.curAddress.phone
         }))

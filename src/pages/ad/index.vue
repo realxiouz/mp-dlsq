@@ -2,8 +2,8 @@
   <div>
     <swiper class="ad-wrap" previous-margin="60rpx" next-margin="60rpx" :current="inx">
       <swiper-item class="ad-item">
-        <div class="ad-c" @click="showImg=true">
-          <img src="/static/img/empty-w.png" style="width:100%" alt="">
+        <div class="ad-c">
+          <img src="https://xzj.csywlkj.com/uploads/20201230/c045a3913b12a7aa796f48abeb6ddee4.png" style="width:100%" mode="widthFix" alt="">
           <div class="text-center" style="font-size:12px;color:#060606;line-height:130rpx;">稀有的高贵品质</div>
           <div class="" style="font-size:8px;width:400rpx;line-height:36rpx;">
             不是每一款水，都有这么美好的标签。穿越千万载时空，自然的珍藏方得在大理矿泉身上呈现。
@@ -11,12 +11,15 @@
             对母婴群体无负担，口感好。偏硅酸含量为36.24m“人体软黄金”偏硅酸，具有软化心血管和强健骨骼的作用。
           </div>
           <div style="flex:1;height:0"></div>
-          <div class="btns"></div>
+          <div class="btns">
+            <img src="https://xzj.csywlkj.com/uploads/20201230/8b94f9a51f9fc4a57603054b839a845b.png" style="width:86rpx" mode="widthFix">
+            <img v-for="(i, inx) in arr[0]" :key="inx" :src="i" style="width:86rpx" mode="widthFix" @click="onShowAd(i)">
+          </div>
         </div>
       </swiper-item>
       <swiper-item class="ad-item">
         <div class="ad-c">
-          <img src="/static/img/empty-w.png" style="width:100%" alt="">
+          <img src="https://xzj.csywlkj.com/uploads/20201230/9b98b2a1cac5819a52541eef5c4a27a7.png" style="width:100%" mode="widthFix"/>
           <div class="text-center" style="font-size:12px;color:#060606;line-height:130rpx;">珍贵的唯一水源地</div>
           <div class="" style="font-size:8px;width:400rpx;line-height:36rpx;">
             每一滴大理矿泉水，都是大理冰川历经时空穿越而来。
@@ -26,12 +29,15 @@
             同时还拥有苍山世界地质公园内唯一合法的饮用天然矿泉水采矿权。
           </div>
           <div style="flex:1;height:0"></div>
-          <div class="btns"></div>
+          <div class="btns">
+            <img src="https://xzj.csywlkj.com/uploads/20201230/8b94f9a51f9fc4a57603054b839a845b.png" style="width:86rpx" mode="widthFix">
+            <img v-for="(i, inx) in arr[1]" :key="inx" :src="i" style="width:86rpx" mode="widthFix" @click="onShowAd(i)">
+          </div>
         </div>
       </swiper-item>
       <swiper-item class="ad-item">
         <div class="ad-c">
-          <img src="/static/img/empty-w.png" style="width:100%" alt="">
+          <img src="https://xzj.csywlkj.com/uploads/20201230/a58cef9e7e7148c3cc1bc37e1cb9886f.png" style="width:100%" mode="widthFix">
           <div class="text-center" style="font-size:12px;color:#060606;line-height:130rpx;">先进的饮水方式</div>
           <div class="" style="font-size:8px;width:400rpx;line-height:36rpx;">
             饮水，让生活充满仪式感，带给你我品质与品位。大理矿泉革命性的饮
@@ -41,13 +47,16 @@
             能。
           </div>
           <div style="flex:1;height:0"></div>
-          <div class="btns"></div>
+          <div class="btns">
+            <img src="https://xzj.csywlkj.com/uploads/20201230/8b94f9a51f9fc4a57603054b839a845b.png" style="width:86rpx" mode="widthFix">
+            <img v-for="(i, inx) in arr[2]" :key="inx" :src="i" style="width:86rpx" mode="widthFix" @click="onShowAd(i)">
+          </div>
         </div>
       </swiper-item>
     </swiper>
 
     <modal :show.sync="showImg" :is-bottom="false">
-      <img style="width:710rpx" src="/static/img/empty-w.png" mode="widthFix" alt="">
+      <img style="width:710rpx" :src="selImg" mode="widthFix" alt="">
     </modal>
   </div>
 </template>
@@ -61,6 +70,29 @@ export default {
     return {
       showImg: false,
       inx: 0,
+
+      arr: [
+        [
+          'https://xzj.csywlkj.com/uploads/20201230/956b95c44ecd9b42db249c0ef9987972.png',
+          'https://xzj.csywlkj.com/uploads/20201230/9ad1214eac5b400a826c3f9910b7eaf3.png',
+          'https://xzj.csywlkj.com/uploads/20201230/c1ab1183232478e404328e91b8161ce0.png',
+          'https://xzj.csywlkj.com/uploads/20201230/0cce0060ee4d5fd1f8666dd6143624a1.png'
+        ],
+        [
+          'https://xzj.csywlkj.com/uploads/20201230/8f06dbe41d92a8547ef17019ee836afd.png'
+        ],
+        [
+          'https://xzj.csywlkj.com/uploads/20201230/705da369540fd7600d4e921aac5357f1.png',
+          'https://xzj.csywlkj.com/uploads/20201230/aa5d10af6e53df4d98d2c316f962e62c.png'
+        ]
+      ],
+      selImg: '',
+    }
+  },
+  methods: {
+    onShowAd(i) {
+      this.selImg = i
+      this.showImg = true
     }
   }
 }
@@ -83,7 +115,12 @@ export default {
       align-items: center;
       .btns{
         margin-bottom: 35rpx;
-        height: 80rpx;;
+        display: flex;
+        padding-left: 50rpx;
+        width: 100%;
+        >img{
+          margin-right: 18rpx;
+        }
       }
     }
   }

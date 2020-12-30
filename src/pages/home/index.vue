@@ -13,9 +13,15 @@
         <img src="/static/img/right.png" style="width:30rpx;height:30rpx" />
       </div>
     </div>
-    <div class="flex justify-around" style="height:145rpx">
+    <!-- <div class="flex justify-around" style="height:145rpx">
       <div v-for="(i,inx) in icons" :key="inx" class="flex column align-center" @click="checkRt(i)">
         <img :src="i.image" style="width:48rpx;height:48rpx">
+        <div style="color:#000;font-size:8px;">{{i.name}}</div>
+      </div>
+    </div> -->
+    <div class="flex justify-around" style="height:145rpx">
+      <div v-for="(i,inx) in eee" :key="inx" class="flex column align-center" @click="i.path&&$go(i.path)">
+        <img :src="i.image" style="width:56rpx;height:56rpx;margin-bottom:8rpx;">
         <div style="color:#000;font-size:8px;">{{i.name}}</div>
       </div>
     </div>
@@ -53,6 +59,28 @@ export default {
       num:30000,
       goods: [],
       icons: [],
+
+      eee: [
+        {
+          image: 'http://xzj.csywlkj.com/uploads/20201230/fdae34518380a9b553a5c6e2b443117a.png',
+          name: '现时优惠',
+        },
+        {
+          image: 'http://xzj.csywlkj.com/uploads/20201230/23b6f0e65807a1482a03503bf3be1459.png',
+          name: '企业资讯',
+          path: `/pages/ad/index?inx=0`
+        },
+        {
+          image: 'http://xzj.csywlkj.com/uploads/20201230/eaca47f5e0362f38b779f36d5c23757c.png',
+          name: '生产工序',
+          path: `/pages/ad/index?inx=1`
+        },
+        {
+          image: 'http://xzj.csywlkj.com/uploads/20201230/b836d92430e8ee53268c21b687839f26.png',
+          name: '水源介绍',
+          path: `/pages/ad/index?inx=2`
+        }
+      ]
     }
   },
   methods: {

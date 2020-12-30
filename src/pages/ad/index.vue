@@ -1,6 +1,6 @@
 <template>
   <div>
-    <swiper class="ad-wrap" previous-margin="60rpx" next-margin="60rpx">
+    <swiper class="ad-wrap" previous-margin="60rpx" next-margin="60rpx" :current="inx">
       <swiper-item class="ad-item">
         <div class="ad-c" @click="showImg=true">
           <img src="/static/img/empty-w.png" style="width:100%" alt="">
@@ -47,16 +47,20 @@
     </swiper>
 
     <modal :show.sync="showImg" :is-bottom="false">
-      <img style="width:710rpx" src="/static/img/empty-w.png" alt="">
+      <img style="width:710rpx" src="/static/img/empty-w.png" mode="widthFix" alt="">
     </modal>
   </div>
 </template>
 
 <script>
 export default {
+  onLoad(opt) {
+    this.inx = opt.inx
+  },
   data() {
     return {
       showImg: false,
+      inx: 0,
     }
   }
 }

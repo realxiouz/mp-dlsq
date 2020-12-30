@@ -70,6 +70,8 @@ export default {
       if (i.path.indexOf('richtext') > -1) {
         let id = i.path.split('?')[1].split('=')[1]
         this.$go(`/pages/rt/index?id=${id}`)
+      } else {
+        this.$go(`/pages/ad/index`)
       }
     }
   }

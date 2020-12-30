@@ -82,6 +82,13 @@
 				"navigationStyle": "default",
 				"navigationBarTitleText": ""
 			}
+		},
+		{
+			"path": "pages/ad/index",
+			"style": {
+				"navigationStyle": "default",
+				"navigationBarTitleText": ""
+			}
 		}
 	],
 	"subPackages": [{

@@ -145,12 +145,13 @@ export default {
       let d = {
         address_id: this.curAddress.id,
         from: 'cart',
+        reservation: this.typeInx,
         goods_list: this.list.map(i => ({
           sku_price_id: i.goods_sku_price_id,
           goods_id: i.goods_id,
           goods_num: i.count,
           dispatch_date: this.typeInx == 0 ? dayjs(new Date()).format('YYYY-MM-DD HH:mm') : `${this.selDate} ${this.selTime}`,
-          dispatch_phone: this.curAddress.phone
+          dispatch_phone: this.curAddress.phone,
         }))
       }
       this.$post('order/delivery', d)

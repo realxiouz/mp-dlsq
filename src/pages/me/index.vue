@@ -23,7 +23,7 @@
 				</div>
 			</div>
 
-      <img @click="onLogout" class="pos-a" style="width:60rpx;height:60rpx;right:40rpx;top:200rpx;" src="/static/img/setting.png" alt="">
+      <!-- <img @click="onLogout" class="pos-a" style="width:60rpx;height:60rpx;right:40rpx;top:200rpx;" src="/static/img/setting.png" alt=""> -->
     </div>
     
     <div class="bg-white flex" style="margin-top:60rpx;border-radius:16rpx;box-shadow: 0px 11px 44px 0px rgba(0, 0, 0, 0.09);">

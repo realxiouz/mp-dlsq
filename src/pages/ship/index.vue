@@ -105,7 +105,7 @@ export default {
       this.$get('order/index?type=noget&order_type=delivery')
     ]).then(r => {
       this.list = r[0].data.filter(i => i.goods_num).map(i => {
-        i.count = 1
+        i.count = 0
         i.max = i.goods_num
         return i
       })
@@ -146,7 +146,7 @@ export default {
         address_id: this.curAddress.id,
         from: 'cart',
         reservation: this.typeInx,
-        goods_list: this.list.map(i => ({
+        goods_list: this.list.filter(i => i.count).map(i => ({
           sku_price_id: i.goods_sku_price_id,
           goods_id: i.goods_id,
           goods_num: i.count,
@@ -175,7 +175,7 @@ export default {
   computed: {
     ...mapState('cart', ['curAddress']),
     dis() {
-      if ((this.typeInx==0 || (this.typeInx == 1 && this.selDate && this.selTime)) && this.curAddress.id && this.list.some(i => i.goods_num)) {
+      if ((this.typeInx==0 || (this.typeInx == 1 && this.selDate && this.selTime)) && this.curAddress.id && this.list.some(i => i.count)) {
         return false
       }
       return true

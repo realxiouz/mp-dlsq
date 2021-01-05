@@ -2,7 +2,7 @@
   <div>
     <div class="sticky">
       <div class="bg-primary doing flex align-center justify-around">
-        <div style="font-size:14px;">添加收货地址</div>
+        <div style="font-size:14px;">{{id?'编辑':'添加'}}收货地址</div>
       </div>
     </div>
     <div class="line flex align-center bg-white">
@@ -40,7 +40,7 @@
 
     <bottom-bar :bar-height="120">
       <div style="height:120rpx" class="flex align-center justify-around">
-        <div class="btn text-center" @click="onConfirm">添加地址</div>
+        <div class="btn text-center" @click="onConfirm">{{id?'编辑':'添加'}}地址</div>
       </div>
     </bottom-bar>
   </div>
@@ -50,6 +50,22 @@
 import { getWxAuthSetting } from '@/common/js/utils'
 
 export default {
+  onLoad(opt) {
+    this.id = opt.id
+    if (this.id) {
+      this.$get('address/info', {
+        id: this.id
+      }).then(r => {
+        let {consignee, phone, address, latitude, longitude, name} = r.data
+        this.consignee = consignee
+        this.phone = phone
+        this.address = address
+        this.name = address
+        this.longitude = longitude
+        this.latitude = latitude
+      })
+    }
+  },
   data() {
     return {
       sexInx: 0,
@@ -60,6 +76,7 @@ export default {
       name: '',
       phone: '',
       
+      id: '',
     }
   },
   methods: {
@@ -129,6 +146,9 @@ export default {
         phone: this.phone,
         address: this.address,
         area_id: "530102"
+      }
+      if (this.id) {
+        d.id = this.id
       }
       this.$post('address/edit', d)
         .then(r => {

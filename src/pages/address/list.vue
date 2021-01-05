@@ -25,6 +25,7 @@
             {{`${i.consignee} ${i.phone}`}} <div class="bg-primary" style="padding:4rpx 8rpx;margin-left:8rpx;border-radius:4rpx;" v-if="curAddress.id==i.id">已选择</div>
           </div>
         </div>
+        <div class="icon-right" style="margin-right:16rpx" @click="$go(`/pages/address/detail?id=${i.id}`)"></div>
       </div>
     </template>
     <div class="flex column align-center" v-else>

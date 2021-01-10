@@ -20,7 +20,12 @@
         <div class="line flex">
           <div class="title">配送类型</div>
           <div class="left"></div>
-          <div>试试配送</div>
+          <div>{{i.reservation==0?'实时配送':'预约配送'}}</div>
+        </div>
+        <div class="line flex" v-if="i.reservation==1">
+          <div class="title">预约时间</div>
+          <div class="left"></div>
+          <div>{{i.ext_arr.expired_time|time}}</div>
         </div>
         <div class="line flex">
           <div class="title">配送地址</div>
@@ -30,10 +35,10 @@
             <div>{{`${i.consignee} ${i.phone}`}}</div>
           </div>
         </div>
-        <div class="line flex">
+        <div class="line flex" v-if="i.item[0].store">
           <div class="title">配送人员</div>
           <div class="left"></div>
-          <div>杨某某</div>
+          <div>{{`${i.item[0].store.realname} ${i.item[0].store.phone}`}}</div>
         </div>
         <div class="line flex">
           <div class="title">配送单号</div>
@@ -45,7 +50,7 @@
           <div class="left"></div>
           <div>{{i.createtime|time}}</div>
         </div>
-        <div class="line flex">
+        <div class="line flex" v-if="i.ext_arr.send_time">
           <div class="title">送达时间</div>
           <div class="left"></div>
           <div>{{i.ext_arr.send_time|time}}</div>

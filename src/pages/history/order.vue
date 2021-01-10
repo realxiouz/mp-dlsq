@@ -9,10 +9,10 @@
         <div>{{i.createtime|time('HH:mm')}}</div>
       </div>
       <div style="padding: 0 70rpx;">
-        <div class="line flex">
+        <!-- <div class="line flex">
           <div class="left">订单状态</div>
           <div>{{i.status_name}}</div>
-        </div>
+        </div> -->
         <div class="line flex">
           <div class="left">订单号码<span style="margin-left:24rpx">{{i.order_sn}}</span></div>
         </div>

@@ -86,10 +86,10 @@ export default {
           }
           let d = {
             from: 'cart',
-            address_id: this.curAddress.id,
+            // address_id: this.curAddress.id,
             goods_list: this.cartGoods.map(i => {
               i.dispatch_type = this.check1 ? 'store' : 'selfetch'
-              i.store_id = 1
+              // i.store_id = 1
               return i
             })
           }

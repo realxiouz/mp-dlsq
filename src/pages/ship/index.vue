@@ -6,7 +6,7 @@
           <img style="width:48rpx;height:48rpx" src="/static/img/shiping.png" alt="">
         </div>
         <picker :range="shipList" range-key="order_sn" @change="onOrderChange">
-          <div style="font-size:12px;">正在进行的配送</div>
+          <div style="font-size:12px;">未完成的订单</div>
         </picker>
       </div>
       <div class="bg-primary doing flex align-center justify-center">

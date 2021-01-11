@@ -27,6 +27,10 @@ export const http = (url, data, method = 'post', showErrToast = true) => {
         let [err, data] = r
         if (err) {
           reject(err)
+          uni.showToast({
+            title: `${err.errMsg||'接口异常'}`,
+            icon: 'none'
+          })
           return
         }
         let status = data.statusCode

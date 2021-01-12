@@ -40,7 +40,7 @@
 
     <bottom-bar :bar-height="120">
       <div style="height:120rpx" class="flex align-center justify-around">
-        <div class="btn text-center" @click="onConfirm">{{id?'编辑':'添加'}}地址</div>
+        <div class="btn text-center" :class="{dis}" @click="onConfirm">{{id?'编辑':'添加'}}地址</div>
       </div>
     </bottom-bar>
   </div>
@@ -127,10 +127,10 @@ export default {
         this.$toast('必须填写收货人姓名')
         return
       }
-      // if (!/^1\d[10]$/.test(this.phone)) {
-      //   this.$toast('填写正确的手机号码')
-      //   return
-      // }
+      if (!/^1\d{10}$/.test(this.phone)) {
+        this.$toast('填写正确的手机号码')
+        return
+      }
       if (!this.latitude||!this.longitude) {
         this.$toast('还未选择配送地址')
         return
@@ -161,7 +161,14 @@ export default {
         })
     },
   },
-  
+  computed: {
+    dis() {
+      if (!this.consignee||!this.address||!this.latitude||!this.longitude||!/^1\d{10}$/.test(this.phone)) {
+        return true
+      }
+      return false
+    }
+  }
 }
 </script>
 
@@ -190,5 +197,8 @@ export default {
   font-size: 12px;
   border-radius: 12rpx;
   line-height: 77rpx;
+  &.dis{
+    background: #B5B5B5;
+  }
 }
 </style>

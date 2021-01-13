@@ -57,16 +57,16 @@ export const http = (url, data, method = 'post', showErrToast = true) => {
             })
             reject(new Error(`${getUrl(url)}`))
             break
-          case 400:
-            if (data.data.code == 4001) {
+          case 401:
+            if (data.data.code == 401) {
               uni.showModal({
                 title: '温馨提示',
                 content: '系统检测您还未登录,无法完成此操作!',
                 confirmText: '去登陆',
                 success: r => {
                   if(r.confirm){
-                    uni.navigateTo({
-                      url: '/pages/auth/index'
+                    uni.switchTab({
+                      url: '/pages/me/index'
                     })
                   }
                 }

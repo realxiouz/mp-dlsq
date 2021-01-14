@@ -34,6 +34,10 @@
       <img class="pos-a" style="width:60rpx;height:60rpx;left:24rpx;top:350rpx" src="/static/img/left-blue.png" alt="">
       <img class="pos-a" style="width:60rpx;height:60rpx;right:24rpx;top:350rpx" src="/static/img/right-blue.png" alt="">
     </div>
+
+    <div class="flex">
+      <img v-for="(i,inx) in preImg" :key="inx" :src="i" style="width:0;height:0;" alt="">
+    </div>
   </div>
 </template>
 
@@ -80,6 +84,16 @@ export default {
           name: '水源介绍',
           path: `/pages/ad/index?inx=2`
         }
+      ],
+
+      preImg: [
+        'https://yunnanxinzijia.com/uploads/20210114/803df5dccfa32e3bfc825a412eecaef8.png',
+        'https://yunnanxinzijia.com/uploads/20210114/638ee5e8752eb5710af33f47252fa90b.png',
+        'https://yunnanxinzijia.com/uploads/20210114/75517134a477b77ad0f53c90398d3626.png',
+        'https://yunnanxinzijia.com/uploads/20210114/d29b6e3e01d9ecc03607c1284c3fee77.png',
+        'https://yunnanxinzijia.com/uploads/20210114/e9c5292e8f5bf9598f6134ffdffeb2cd.png',
+        'https://yunnanxinzijia.com/uploads/20210114/4c5a89f0200d235db295928016524652.png',
+        'https://yunnanxinzijia.com/uploads/20210114/3323eb2db39c587c74c69dcefb80ec79.png',
       ]
     }
   },

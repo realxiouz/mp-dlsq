@@ -73,17 +73,17 @@ export default {
 
       arr: [
         [
-          'https://xzj.csywlkj.com/uploads/20201230/956b95c44ecd9b42db249c0ef9987972.png',
-          'https://xzj.csywlkj.com/uploads/20201230/9ad1214eac5b400a826c3f9910b7eaf3.png',
-          'https://xzj.csywlkj.com/uploads/20201230/c1ab1183232478e404328e91b8161ce0.png',
-          'https://xzj.csywlkj.com/uploads/20201230/0cce0060ee4d5fd1f8666dd6143624a1.png'
+          'https://yunnanxinzijia.com/uploads/20210114/803df5dccfa32e3bfc825a412eecaef8.png',
+          'https://yunnanxinzijia.com/uploads/20210114/638ee5e8752eb5710af33f47252fa90b.png',
+          'https://yunnanxinzijia.com/uploads/20210114/75517134a477b77ad0f53c90398d3626.png',
+          'https://yunnanxinzijia.com/uploads/20210114/d29b6e3e01d9ecc03607c1284c3fee77.png'
         ],
         [
-          'https://xzj.csywlkj.com/uploads/20201230/8f06dbe41d92a8547ef17019ee836afd.png'
+          'https://yunnanxinzijia.com/uploads/20210114/e9c5292e8f5bf9598f6134ffdffeb2cd.png'
         ],
         [
-          'https://xzj.csywlkj.com/uploads/20201230/705da369540fd7600d4e921aac5357f1.png',
-          'https://xzj.csywlkj.com/uploads/20201230/aa5d10af6e53df4d98d2c316f962e62c.png'
+          'https://yunnanxinzijia.com/uploads/20210114/4c5a89f0200d235db295928016524652.png',
+          'https://yunnanxinzijia.com/uploads/20210114/3323eb2db39c587c74c69dcefb80ec79.png'
         ]
       ],
       selImg: '',

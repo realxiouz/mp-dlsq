@@ -2,7 +2,7 @@
   <div class="cart-wrap ">
     <div class="flex pos-r" style="z-index:1111;">
       <div class="left flex align-center bg-primary" style="height:100rpx;">
-        <div style="width:72rpx;height:58rpx;margin: 0 24rpx 0 36rpx" class="pos-r">
+        <div style="width:72rpx;height:58rpx;margin: 0 24rpx 0 36rpx" class="pos-r" @click="showDetail=true">
           <img src="/static/img/cart.png" style="width:100%;height:100%;"  />
           <div class="pos-a badge" style="" v-if="totalCount">{{totalCount}}</div>
         </div>
@@ -16,7 +16,7 @@
     </div>
     <template v-if="totalPrice>0">
       <div style="height:100rpx;width:16rpx;"></div>
-      <div class="bg-bold text-center" style="width:140rpx;font-size:12px;line-height:100rpx;" @click.stop="onShowDetail">{{!showDetail?'查看':'去结算'}}</div>
+      <div class="bg-bold text-center" style="width:140rpx;font-size:12px;line-height:100rpx;" @click.stop="onShowDetail">去结算</div>
     </template>
     </div>
     
@@ -65,12 +65,8 @@ export default {
   },
   methods: {
     onShowDetail() {
-      if (!this.showDetail) {
-        this.showDetail = true
-      } else {
-        this.$go(`/pages/order/pay`)
-        this.showDetail = false
-      }
+      this.$go(`/pages/order/pay`)
+      this.showDetail = false
     },
     onClear() {
       this.$showModal({

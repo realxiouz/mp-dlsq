@@ -2,15 +2,15 @@
   <div style="padding: 50rpx 40rpx 0;min-height:100vh;background:#fff">
     <div class="flex column align-center" style="width:100%;">
       <div class="color-primary" style="font-size:14px;">商城订单</div>
-      <div style="color:#868787;margin-top:50rpx;font-size:8px;">支付剩余时间: {{'15:00'}}</div>
+      <div style="color:#868787;margin-top:50rpx;font-size:8px;">支付剩余时间: {{str}}</div>
       <div class="text-bold text-price" style="color:#060606;font-size:30px;margin:30rpx 0;">{{totalPrice}}</div>
       <div class="flex align-center" style="color:#868787;font-size:10px;" @click="show=!show">
         查看订单详情 <div style="font-size:10px;margin-left:10rpx" :class="show?'icon-down':'icon-right'"></div>
       </div>
-      <div v-if="show" style="width:330rpx;margin-top:30rpx;color:#5F5F5F;font-size:10px;">
-        <div class="flex line">
+      <div v-if="show" style="width:400rpx;margin-top:30rpx;color:#5F5F5F;font-size:10px;">
+        <!-- <div class="flex line">
           订单号码: {{'11111111'}}
-        </div>
+        </div> -->
         <div class="flex line" v-for="(i, inx) in cartGoods" :key="inx">
           <div>{{i.title}}</div>
           <div>{{i.subtitle}}</div>
@@ -60,16 +60,42 @@
 <script>
 import { mapState, mapGetters } from 'vuex'
 export default {
+  onLoad() {
+    this.startTimer()
+  },
+  onUnload() {
+    this.t && clearInterval(this.t)
+  },
   data() {
     return {
       show: false,
 
-      check0: false,
+      check0: true,
       check1: false,
-      check2: false,
+      check2: true,
+
+      str: '15:00'
     }
   },
   methods: {
+    startTimer() {
+      let countDown = 15 * 60
+      this.t = setInterval(_ => {
+        countDown--
+        let m = parseInt(countDown / 60)
+        let s = countDown % 60
+        this.str = `${m<10?'0'+m:m}:${s<10?'0'+s:s}`
+        if (countDown <= 0) {
+          clearInterval(this.t)
+          this.$showModal({
+            content: '支付超时,重新支付',
+            successCb: _ => {
+              this.$go(1, 'back')
+            }
+          })
+        }
+      }, 1000)
+    },
     onPay() {
       if (this.check0&&this.check2) {
         if (this.order_sn) {

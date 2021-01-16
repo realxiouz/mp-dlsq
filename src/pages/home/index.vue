@@ -1,15 +1,15 @@
 <template>
   <div style="height:100vh;" class="bg-white flex column">
     <div class="flex align-center" style="padding: 70rpx 0 42rpx;">
-      <div class="left flex justify-around align-center" style="height:234rpx" @click="onBannerPre">
+      <div class="left flex justify-around align-center" style="height:234rpx">
         <img src="/static/img/left.png" style="width:30rpx;height:30rpx" />
       </div>
-      <swiper style="width:666rpx;height:234rpx;" :current="bannerInx" circular @animationfinish="onBannerChange">
+      <swiper style="width:666rpx;height:234rpx;">
         <swiper-item v-for="(i, inx) in banner" :key="inx">
           <img class="fill" :src="i.image" style="border-radius:18rpx" />
         </swiper-item>
       </swiper>
-      <div class="left flex justify-around align-center" style="height:234rpx" @click="onBannerNext">
+      <div class="left flex justify-around align-center" style="height:234rpx">
         <img src="/static/img/right.png" style="width:30rpx;height:30rpx" />
       </div>
     </div>
@@ -26,13 +26,13 @@
       </div>
     </div>
     <div class="left pos-r" style="width:750rpx;">
-      <swiper style="height:100%;">
-        <swiper-item v-for="(i, inx) in goods" :key="inx">
+      <swiper style="height:100%;" :current="bannerInx" circular @animationfinish="onBannerChange">
+        <swiper-item v-for="(i, inx) in goods" :key="inx" @click="onGoDetail(i)">
           <img class="fill" :src="i.image" />
         </swiper-item>
       </swiper>
-      <img class="pos-a" style="width:60rpx;height:60rpx;left:24rpx;top:350rpx" src="/static/img/left-blue.png" alt="">
-      <img class="pos-a" style="width:60rpx;height:60rpx;right:24rpx;top:350rpx" src="/static/img/right-blue.png" alt="">
+      <img class="pos-a" style="width:60rpx;height:60rpx;left:24rpx;top:350rpx" src="/static/img/left-blue.png" @click="onBannerPre">
+      <img class="pos-a" style="width:60rpx;height:60rpx;right:24rpx;top:350rpx" src="/static/img/right-blue.png" @click="onBannerNext">
     </div>
 
     <div class="flex">
@@ -114,6 +114,14 @@ export default {
         this.$go(`/pages/rt/index?id=${id}`)
       } else {
         this.$go(`/pages/ad/index`)
+      }
+    },
+    onGoDetail(i) {
+      if (i.path) {
+        let idStr = i.path.split('?')[1]
+        this.$go(`/pages/goods/detail?${idStr}`)
+      } else {
+        this.$toast('参数没有配置正确')
       }
     }
   }

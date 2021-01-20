@@ -73,7 +73,7 @@ export default {
         this.isLoaded = false
       }
       let cId = this.navs[this.curInx].id
-      this.$post('goods/lists', {
+      this.$get('goods/lists', {
         category_id: cId,
         page: this.page
       }).then(r => {

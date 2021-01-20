@@ -99,10 +99,10 @@ export default {
   },
   methods: {
     onBannerPre() {
-      this.bannerInx = (this.num--)%this.banner.length
+      this.bannerInx = (this.num--)%this.goods.length
     },
     onBannerNext() {
-      this.bannerInx = (this.num++)%this.banner.length
+      this.bannerInx = (this.num++)%this.goods.length
     },
     onBannerChange(e) {
       console.log(e.detail.current)

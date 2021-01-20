@@ -1,7 +1,12 @@
 <template>
   <div class="flex column" style="height:100vh;">
-    <div class="left" style="width:100%;">
+    <div style="width:100%;">
       <img :src="curSku.image" mode="widthFix" style="width:100%;"/>
+    </div>
+    <div class="left" style="width:100%;">
+      <div v-if="curSku.content" style="padding:20rpx 40rpx;color:#222;" class="font10">
+        {{curSku.content}}
+      </div>
     </div>
     <div class="info bg-white flex column">
       <div class="flex" style="margin-top:42rpx;">
@@ -38,7 +43,7 @@ export default {
     this.$post('goods/detail', {
       id: opt.id
     }).then(r => {
-      let {title, subtitle, image, sku_price, id, params} = r.data
+      let {title, subtitle, image, sku_price, id, params, content} = r.data
       this.curSku= {
         goods_id: id,
         sku_price_id: sku_price[0].id,
@@ -47,6 +52,7 @@ export default {
         title,
         subtitle,
         params,
+        content,
       }
     })
       .finally(_ => {
@@ -68,7 +74,7 @@ export default {
 
 <style lang='less' scoped>
 .info{
-  height: 444rpx;
+  height: 344rpx;
   border-radius: 36rpx 36rpx 0 0;
   padding: 0 100rpx;
 }

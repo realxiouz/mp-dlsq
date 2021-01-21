@@ -5,7 +5,7 @@
     </div>
     <div class="left" style="width:100%;">
       <div v-if="curSku.content" style="padding:20rpx 40rpx;color:#222;" class="font10">
-        {{curSku.content}}
+        产品介绍: {{curSku.content}}
       </div>
     </div>
     <div class="info bg-white flex column">

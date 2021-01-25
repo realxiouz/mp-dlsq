@@ -99,7 +99,7 @@ export default {
 
 <style lang="less" scoped>
 .nav-item{
-  font-size: 10px;
+  font-size: 12px;
   color:#030303;
   &.sel{
     color: #AEC3E5;

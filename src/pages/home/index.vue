@@ -22,7 +22,7 @@
     <div class="flex justify-around" style="height:145rpx">
       <div v-for="(i,inx) in eee" :key="inx" class="flex column align-center" @click="i.path&&$go(i.path)">
         <img :src="i.image" style="width:56rpx;height:56rpx;margin-bottom:8rpx;">
-        <div style="color:#000;font-size:8px;">{{i.name}}</div>
+        <div style="color:#000;font-size:12px;">{{i.name}}</div>
       </div>
     </div>
     <div class="left pos-r" style="width:750rpx;">

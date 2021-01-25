@@ -10,7 +10,7 @@
         <div style="height:48rpx;width:2rpx;background:#fff;"></div>
         <div class="left">
           <div class="text-center" v-if="totalPrice==0" style="font-size:10px;">暂无任何商品  请添加商品后再进行结算</div>
-          <div class="text-center" v-else style="font-size:10px;">共计: <span class="text-price text-bold" style="font-size:18px;">{{totalPrice}}</span>
+          <div class="text-center" v-else style="font-size:10px;">共计: <span class="text-price text-bold" style="font-size:18px;color:red;">{{totalPrice}}</span>
           </div>
       </div>
     </div>

@@ -4,7 +4,7 @@
       <img :src="curSku.image" mode="widthFix" style="width:100%;"/>
     </div>
     <div class="left" style="width:100%;">
-      <div style="padding:20rpx 40rpx;color:#222;" class="font10">
+      <div style="padding:20rpx 40rpx;color:#222;" class="font12">
         产品介绍：大理，有最纯的山风，最纯的野花，最纯的雪，最纯的月光，最纯的人，当然也有最纯的水.
       </div>
     </div>

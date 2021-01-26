@@ -28,7 +28,7 @@
     
     <div class="bg-white flex" style="margin-top:60rpx;border-radius:16rpx;box-shadow: 0px 11px 44px 0px rgba(0, 0, 0, 0.09);">
       <div v-for="(i, inx) in navs" :key="inx" class="left flex align-center justify-around" style="height:144rpx;" @click="onNav(i)">
-        <div class="color-primary font10 flex align-center column">
+        <div class="color-primary font14 flex align-center column">
           <img style="width:48rpx;height:48rpx;margin-bottom:6rpx;" :src="i.img" alt="">
           <div>{{i.name}}</div>
         </div>

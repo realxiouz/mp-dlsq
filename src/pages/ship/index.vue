@@ -20,11 +20,11 @@
           <img :src="i.goods_image" style="width:100%;height:100%;" />
         </div>
         <div class="left">
-          <div style="color:#010101;font-size:10px;">{{i.goods_title}}</div>
-          <div style="font-size:10px;" :style="{color: i.goods_num<=1 ? '#EB6877' :'#5677AB'}">库存: {{i.goods_num}}</div>
+          <div style="color:#010101;font-size:14px;">{{i.goods_title}}</div>
+          <div style="font-size:14px;" :style="{color: i.goods_num<=1 ? '#EB6877' :'#5677AB'}">库存: {{i.goods_num}}</div>
         </div>
         <div class="flex column align-center">
-          <div class="color-primary" style="font-size:10px;margin-bottom:24rpx;">配送数量</div>
+          <div class="color-primary" style="font-size:14px;margin-bottom:24rpx;">配送数量</div>
           <ship-number w="190rpx" v-model="i.count" :max="i.max"/>
         </div>
       </div>
@@ -34,7 +34,7 @@
         </div>
         <picker class="left" :range="types" @change="onTypeChange" :value="typeInx">
           <div class="flex align-center">
-            <div class="left" style="color:#010101;font-size:10px;line-height:80rpx;">{{typeInx>=0?types[typeInx]:'选择配送类型'}}</div>
+            <div class="left" style="color:#010101;font-size:14px;line-height:80rpx;">{{typeInx>=0?types[typeInx]:'选择配送类型'}}</div>
             <div class="icon-right" style="font-size:16px;color:#A0A0A0"></div>
           </div>
         </picker>
@@ -45,7 +45,7 @@
         </div>
         <picker class="left" :range="types" @change="onDateChange" :value="selDate" mode="date">
           <div class="flex align-center">
-            <div class="left" style="color:#010101;font-size:10px;line-height:80rpx;">
+            <div class="left" style="color:#010101;font-size:14px;line-height:80rpx;">
               {{!selDate?'选择配送日期':`选择的日期: ${selDate}`}}
             </div>
             <div class="icon-right" style="font-size:16px;color:#A0A0A0"></div>
@@ -58,7 +58,7 @@
         </div>
         <picker class="left" :range="types" @change="onTimeChange" :value="selTime" mode="time">
           <div class="flex align-center">
-            <div class="left" style="color:#010101;font-size:10px;line-height:80rpx;">
+            <div class="left" style="color:#010101;font-size:14px;line-height:80rpx;">
               {{!selDate?'选择配送时间':`选择的时间: ${selTime}`}}
             </div>
             <div class="icon-right" style="font-size:16px;color:#A0A0A0"></div>
@@ -69,7 +69,7 @@
         <div class="img-wrap1 flex align-center justify-center">
           <img src="/static/img/loc.png" style="width:44rpx;height:44rpx;" alt="">
         </div>
-        <div class="left" style="color:#010101;font-size:10px;line-height:80rpx;">
+        <div class="left" style="color:#010101;font-size:14px;line-height:80rpx;">
           {{curAddress.id?curAddress.address:'选择配送地址'}}
         </div>
         <div class="icon-right" style="font-size:16px;color:#A0A0A0"></div>

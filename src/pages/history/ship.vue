@@ -3,7 +3,7 @@
     <div class="sticky bg-primary flex align-center" style="height:100rpx;padding:0 48rpx;">
       <picker class="font14" mode="date" fields="month" @change="onSel">选择月份: {{selDate?selDate:'全部'}}</picker>
     </div>
-    <div class="ship-item bg-white" v-for="(i, inx) in list" :key="inx" @click="$go(`/pages/ship/doing?id=${i.order_sn}`)">
+    <div class="ship-item bg-white" v-for="(i, inx) in list" :key="inx">
       <div class="bg-primary text-center font10 text-bold" style="padding: 0 70rpx;">
         {{i.createtime|time('YYYY-MM-DD')}}
       </div>

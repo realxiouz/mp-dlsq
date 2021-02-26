@@ -4,7 +4,7 @@
       <div class="left flex justify-around align-center" style="height:234rpx">
         <img src="/static/img/left.png" style="width:30rpx;height:30rpx" />
       </div>
-      <swiper style="width:666rpx;height:234rpx;">
+      <swiper style="width:666rpx;height:234rpx;" autoplay circular :interval="3000">
         <swiper-item v-for="(i, inx) in banner" :key="inx">
           <img class="fill" :src="i.image" style="border-radius:18rpx" />
         </swiper-item>
@@ -26,7 +26,7 @@
       </div>
     </div>
     <div class="left pos-r" style="width:750rpx;">
-      <swiper style="height:100%;" :current="bannerInx" circular @animationfinish="onBannerChange">
+      <swiper style="height:100%;" :current="bannerInx" circular @animationfinish="onBannerChange" autoplay :interval="3000">
         <swiper-item v-for="(i, inx) in goods" :key="inx" @click="onGoDetail(i)">
           <img class="fill" :src="i.image" />
         </swiper-item>
@@ -67,7 +67,7 @@ export default {
       eee: [
         {
           image: 'http://xzj.csywlkj.com/uploads/20201230/fdae34518380a9b553a5c6e2b443117a.png',
-          name: '现时优惠',
+          name: '限时优惠',
         },
         {
           image: 'http://xzj.csywlkj.com/uploads/20201230/23b6f0e65807a1482a03503bf3be1459.png',

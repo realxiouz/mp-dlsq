@@ -17,6 +17,7 @@
     </div>
 
     <cart />
+    <div style="height:130rpx;"></div>
   </div>
 </template>
 

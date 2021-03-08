@@ -51,7 +51,7 @@ export default {
     getData(reset = false) {
       let d = {
         page: this.page,
-        type: 'all',
+        type: 'payed',
       }
       if (this.selDate) {
         d.date = this.selDate

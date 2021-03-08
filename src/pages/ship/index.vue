@@ -104,8 +104,8 @@ export default {
       this.$get('order/deposit'),
       this.$get('order/index?type=noget&order_type=delivery')
     ]).then(r => {
-      this.list = r[0].data.filter(i => i.goods_num).map(i => {
-        i.count = 0
+      this.list = r[0].data.filter(i => i.goods_num>0).map(i => {
+        i.count = 1
         i.max = i.goods_num
         return i
       })

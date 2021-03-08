@@ -40,7 +40,7 @@
 
     <bottom-bar :bar-height="120">
       <div style="height:120rpx" class="flex align-center justify-around">
-        <div class="btn text-center" :class="{dis}" @click="onConfirm">{{id?'编辑':'添加'}}地址</div>
+        <div class="btn text-center" :class="{dis}" @click="onConfirm">{{id?'编辑地址':'完成添加'}}</div>
       </div>
     </bottom-bar>
   </div>

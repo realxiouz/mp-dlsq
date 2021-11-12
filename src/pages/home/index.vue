@@ -4,7 +4,7 @@
       <div class="left flex justify-around align-center" style="height:234rpx">
         <img src="/static/img/left.png" style="width:30rpx;height:30rpx" />
       </div>
-      <swiper style="width:666rpx;height:234rpx;" autoplay circular :interval="3000">
+      <swiper style="width:666rpx;height:400rpx;" autoplay circular :interval="3000">
         <swiper-item v-for="(i, inx) in banner" :key="inx">
           <img class="fill" :src="i.image" style="border-radius:18rpx" />
         </swiper-item>
@@ -13,12 +13,6 @@
         <img src="/static/img/right.png" style="width:30rpx;height:30rpx" />
       </div>
     </div>
-    <!-- <div class="flex justify-around" style="height:145rpx">
-      <div v-for="(i,inx) in icons" :key="inx" class="flex column align-center" @click="checkRt(i)">
-        <img :src="i.image" style="width:48rpx;height:48rpx">
-        <div style="color:#000;font-size:8px;">{{i.name}}</div>
-      </div>
-    </div> -->
     <div class="flex justify-around" style="height:145rpx">
       <div v-for="(i,inx) in eee" :key="inx" class="flex column align-center" @click="i.path&&$go(i.path)">
         <img :src="i.image" style="width:56rpx;height:56rpx;margin-bottom:8rpx;">
@@ -31,8 +25,8 @@
           <img class="fill" :src="i.image" />
         </swiper-item>
       </swiper>
-      <img class="pos-a" style="width:60rpx;height:60rpx;left:24rpx;top:350rpx" src="/static/img/left-blue.png" @click="onBannerPre">
-      <img class="pos-a" style="width:60rpx;height:60rpx;right:24rpx;top:350rpx" src="/static/img/right-blue.png" @click="onBannerNext">
+      <img class="pos-a" style="width:60rpx;height:60rpx;left:24rpx;top:200rpx" src="/static/img/left-blue.png" @click="onBannerPre">
+      <img class="pos-a" style="width:60rpx;height:60rpx;right:24rpx;top:200rpx" src="/static/img/right-blue.png" @click="onBannerNext">
     </div>
 
     <div class="flex">

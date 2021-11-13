@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!-- <swiper class="ad-wrap" previous-margin="60rpx" next-margin="60rpx" :current="inx">
+    <swiper class="ad-wrap" previous-margin="60rpx" next-margin="60rpx" :current="inx">
       <swiper-item class="ad-item">
         <div class="ad-c">
           <img src="https://xzj.csywlkj.com/uploads/20201230/c045a3913b12a7aa796f48abeb6ddee4.png" style="width:100%" mode="widthFix" alt="">
@@ -57,9 +57,9 @@
 
     <modal :show.sync="showImg" :is-bottom="false">
       <img style="width:710rpx" :src="selImg" mode="widthFix" alt="">
-    </modal> -->
-    <div style="background:#BCD0EB;position:sticky;top:0;height:211rpx;z-index:-1;"></div>
-    <div class="c"></div>
+    </modal>
+    <!-- <div style="background:#BCD0EB;position:sticky;top:0;height:211rpx;z-index:-1;"></div>
+    <div class="c"></div> -->
   </div>
 </template>
 

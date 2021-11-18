@@ -8,11 +8,10 @@
       <div class="l2">{{list[curInx].c}}</div>
     </div>
     <div class="left"></div>
-    <div style="height:60rpx;"></div>
     <scroll-view style="height:222rpx;white-space: nowrap;" :scroll-x="true">
       <img @click="toggle(inx)" v-for="i, inx in list" :key="inx" :src="i.img" style="width:222rpx;height:222rpx;margin:0 24rpx;" alt="">
     </scroll-view>
-    <div style="height:80rpx;"></div>
+    <div class="left"></div>
   </div>
 </template>
 
@@ -111,6 +110,7 @@ export default {
   margin: -151rpx auto;
   background: #fff;
   // height: 720rpx;
+  min-height: 650rpx;
   border-radius: 36rpx;
   z-index: 2;
   padding: 80rpx;
